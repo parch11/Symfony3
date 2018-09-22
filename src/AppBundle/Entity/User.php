@@ -118,6 +118,15 @@ class User implements UserInterface
     {
         $this->password = $password;
     }
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+    }
     public function getRoles()
     {
         return $this->roles;
