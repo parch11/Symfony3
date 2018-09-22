@@ -1,0 +1,68 @@
+AppBundle\Entity\User:
+    attributes:
+        id:
+            groups: ['User', 'Product']
+        username:
+            groups: ['User', 'Product']
+        plainPassword:
+            groups: ['User', 'Product']
+        email:
+            groups: ['User', 'Product']
+        isActive:
+            groups: ['User', 'Product']
+        roles:
+            groups: ['User', 'Product']
+        products:
+            groups: ['User']
+
+
+AppBundle\Entity\Product:
+    attributes:
+        id:
+            groups: ['User', 'Product']
+        title:
+            groups: ['User', 'Product']
+        description:
+            groups: ['User', 'Product']
+        image:
+            groups: ['User', 'Product']
+        ref:
+            groups: ['User', 'Product']
+        createdAt:
+            groups: ['User', 'Product']
+        autoDeleteAt:
+            groups: ['User', 'Product']
+        city:
+            groups: ['User', 'Product']
+        tags:
+            groups: ['User', 'Product']
+        category:
+            groups: ['User', 'Product']
+        user:
+            groups: ['Product']
+
+
+
+# EXEMPLE :
+
+# AppBundle\Entity\Place:
+#     attributes:
+#         id:
+#             groups: ['place', 'price']
+#         name:
+#             groups: ['place', 'price']
+#         address:
+#             groups: ['place', 'price']
+#         prices:
+#             groups: ['place']
+
+# AppBundle\Entity\Price:
+#     attributes:
+#         id:
+#             groups: ['place', 'price']
+#         type:
+#             groups: ['place', 'price']
+#         value:
+#             groups: ['place', 'price']
+#         place:
+#             groups: ['price']
