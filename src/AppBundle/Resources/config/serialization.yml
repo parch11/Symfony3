@@ -1,45 +1,45 @@
 AppBundle\Entity\User:
     attributes:
         id:
-            groups: ['User', 'Product']
+            groups: ['allUser', 'oneProduct', 'oneUser']
         username:
-            groups: ['User', 'Product']
+            groups: ['allUser', 'oneProduct', 'oneUser']
         plainPassword:
-            groups: ['User', 'Product']
+            groups: ['oneUser']
         email:
-            groups: ['User', 'Product']
+            groups: ['allUser', 'oneUser']
         isActive:
-            groups: ['User', 'Product']
+            groups: ['allUser', 'oneUser']
         roles:
-            groups: ['User', 'Product']
+            groups: ['allUser', 'oneUser']
         products:
-            groups: ['User']
+            groups: ['oneUser']
 
 
 AppBundle\Entity\Product:
     attributes:
         id:
-            groups: ['User', 'Product']
+            groups: ['oneUser', 'oneProduct', 'allProduct']
         title:
-            groups: ['User', 'Product']
+            groups: ['oneUser', 'oneProduct', 'allProduct']
         description:
-            groups: ['User', 'Product']
+            groups: ['oneProduct']
         image:
-            groups: ['User', 'Product']
+            groups: ['oneUser', 'oneProduct', 'allProduct']
         ref:
-            groups: ['User', 'Product']
+            groups: ['oneUser', 'oneProduct', 'allProduct']
         createdAt:
-            groups: ['User', 'Product']
+            groups: ['oneUser', 'oneProduct']
         autoDeleteAt:
-            groups: ['User', 'Product']
+            groups: ['oneProduct']
         city:
-            groups: ['User', 'Product']
+            groups: ['oneProduct']
         tags:
-            groups: ['User', 'Product']
+            groups: ['oneProduct']
         category:
-            groups: ['User', 'Product']
+            groups: ['oneUser', 'oneProduct']
         user:
-            groups: ['Product']
+            groups: ['oneProduct']
 
 
 

@@ -13,7 +13,7 @@ use AppBundle\Entity\User;
 class UserController extends Controller
 {
     /**
-     * @Rest\View(serializerGroups={"User"})
+     * @Rest\View(serializerGroups={"allUser"})
      * @Rest\Get("/users")
      */
     public function getUsersAction(Request $request)
@@ -26,10 +26,10 @@ class UserController extends Controller
         
         return $users;
     }
-    
+
 
     /**
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"oneUser"})
      * @Rest\Get("/users/{user_id}")
      */
     public function getUserAction(Request $request)
