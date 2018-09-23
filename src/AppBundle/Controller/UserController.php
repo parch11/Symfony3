@@ -84,4 +84,40 @@ class UserController extends Controller
             $em->flush();
         }
     }
+    /**
+     * @Rest\View()
+     * @Rest\Put("/users/{id}")
+     */
+    public function updateUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $user = $this->get('doctrine.orm.entity_manager')
+            ->getRepository('AppBundle:User')
+            ->find($request->get('id')); 
+        /* @var $user User */
+
+        if (empty($user)) {
+            return new JsonResponse(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        $form = $this->createForm(UserType::class, $user);
+
+        $form->submit($request->request->all());
+
+        if ($form->isValid()) {
+            $em = $this->get('doctrine.orm.entity_manager');
+            if (!empty($request->request->get("role")) && $request->request->get("role") != "") {
+                $user->removeAllRoles();
+                $user->addRole($request->request->get("role"));
+            }
+            if (!empty($request->request->get("plainPassword")) && $request->request->get("plainPassword") != "") {
+                $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+                $user->setPassword($password);
+            }
+            $em->merge($user);
+            $em->flush();
+            return $user;
+        } else {
+            return $form;
+        }
+    }
 }

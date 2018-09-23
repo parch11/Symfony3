@@ -142,6 +142,13 @@ class User implements UserInterface
         $this->roles->removeElement($role);
     }
 
+    public function removeAllRoles()
+    {
+        foreach ($this->roles as $key => $value) {
+            unset($this->roles[$key]);
+        }
+    }
+
     public function eraseCredentials()
     {
     }
