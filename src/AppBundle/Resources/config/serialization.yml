@@ -31,7 +31,7 @@ AppBundle\Entity\Product:
         createdAt:
             groups: ['oneUser', 'oneProduct']
         autoDeleteAt:
-            groups: ['oneProduct']
+            groups: ['oneUser','oneProduct']
         city:
             groups: ['oneProduct', 'allProducts']
         tags:
