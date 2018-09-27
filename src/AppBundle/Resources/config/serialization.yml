@@ -19,13 +19,13 @@ AppBundle\Entity\User:
 AppBundle\Entity\Product:
     attributes:
         id:
-            groups: ['oneUser', 'oneProduct', 'allProduct']
+            groups: ['oneUser', 'oneProduct', 'allProduct', 'oneCat']
         title:
-            groups: ['oneUser', 'oneProduct', 'allProduct']
+            groups: ['oneUser', 'oneProduct', 'allProduct', 'oneCat']
         description:
             groups: ['oneProduct']
         image:
-            groups: ['oneUser', 'oneProduct', 'allProduct']
+            groups: ['oneUser', 'oneProduct', 'allProduct', 'oneCat']
         ref:
             groups: ['oneUser', 'oneProduct', 'allProduct']
         createdAt:
@@ -41,7 +41,14 @@ AppBundle\Entity\Product:
         user:
             groups: ['oneProduct']
 
-
+AppBundle\Entity\Category:
+    attributes:
+        id:
+            groups: ['allCat', 'oneCat', 'oneProduct']
+        name:
+            groups: ['allCat', 'oneCat', 'oneProduct']
+        products:
+            groups: ['oneCat']
 
 # EXEMPLE :
 
