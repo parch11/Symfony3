@@ -1,17 +1,17 @@
 AppBundle\Entity\User:
     attributes:
         id:
-            groups: ['allUser', 'oneProduct', 'oneUser']
+            groups: ['allUsers', 'oneProduct', 'oneUser']
         username:
-            groups: ['allUser', 'oneProduct', 'oneUser']
+            groups: ['allUsers', 'oneProduct', 'oneUser']
         plainPassword:
             groups: ['oneUser']
         email:
-            groups: ['allUser', 'oneUser']
+            groups: ['allUsers', 'oneUser']
         isActive:
-            groups: ['allUser', 'oneUser']
+            groups: ['allUsers', 'oneUser']
         roles:
-            groups: ['allUser', 'oneUser']
+            groups: ['allUsers', 'oneUser']
         products:
             groups: ['oneUser']
 
@@ -19,21 +19,21 @@ AppBundle\Entity\User:
 AppBundle\Entity\Product:
     attributes:
         id:
-            groups: ['oneUser', 'oneProduct', 'allProduct', 'oneCat']
+            groups: ['oneUser', 'oneProduct', 'allProducts', 'oneCat', 'oneCity']
         title:
-            groups: ['oneUser', 'oneProduct', 'allProduct', 'oneCat']
+            groups: ['oneUser', 'oneProduct', 'allProducts', 'oneCat', 'oneCity']
         description:
             groups: ['oneProduct']
         image:
-            groups: ['oneUser', 'oneProduct', 'allProduct', 'oneCat']
+            groups: ['oneUser', 'oneProduct', 'allProducts', 'oneCat']
         ref:
-            groups: ['oneUser', 'oneProduct', 'allProduct']
+            groups: ['oneUser', 'oneProduct', 'allProducts']
         createdAt:
             groups: ['oneUser', 'oneProduct']
         autoDeleteAt:
             groups: ['oneProduct']
         city:
-            groups: ['oneProduct']
+            groups: ['oneProduct', 'allProducts']
         tags:
             groups: ['oneProduct']
         category:
@@ -49,6 +49,19 @@ AppBundle\Entity\Category:
             groups: ['allCat', 'oneCat', 'oneProduct']
         products:
             groups: ['oneCat']
+
+AppBundle\Entity\City:
+    attributes:
+        id:
+            groups: ['allCities', 'oneCity', 'oneProduct']
+        name:
+            groups: ['allCities', 'oneCity', 'oneProduct', 'allProducts']
+        address:
+            groups: ['allCities', 'oneCity', 'oneProduct']
+        contactMessage:
+            groups: ['oneCity', 'oneProduct']
+        products:
+            groups: ['oneCity']
 
 # EXEMPLE :
 
