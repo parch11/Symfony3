@@ -5,17 +5,18 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use FOS\RestBundle\Controller\Annotations as Rest; 
 
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Rest\View()
+     * @Rest\Get("/")
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        return new JsonResponse(['message' => 'Rien à cette adresse'], Response::HTTP_NOT_FOUND);
     }
 }
