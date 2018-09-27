@@ -88,7 +88,7 @@ class UserController extends Controller
      * @Rest\View()
      * @Rest\Put("/users/{id}")
      */
-    public function updateUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function updateUserAction(Request $request)
     {
         return $this->updateUser($request, true);
     }
@@ -103,7 +103,7 @@ class UserController extends Controller
         return $this->updateUser($request, false);
     }
 
-    private function updateUser(Request $request, $clearMissing)
+    private function updateUser(Request $request, $clearMissing, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:User')
