@@ -11,10 +11,13 @@ use FOS\RestBundle\Controller\Annotations as Rest; // alias pour toutes les anno
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class UserController extends Controller
 {
     /**
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
      * @Rest\View(serializerGroups={"allUsers"})
      * @Rest\Get("/users")
      */
@@ -31,6 +34,7 @@ class UserController extends Controller
 
 
     /**
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
      * @Rest\View(serializerGroups={"oneUser"})
      * @Rest\Get("/users/{user_id}")
      */
@@ -48,6 +52,7 @@ class UserController extends Controller
         return $user;
     }
     /**
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
      * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"oneUser"})
      * @Rest\Post("/users")
      */
@@ -69,6 +74,7 @@ class UserController extends Controller
         }
     }
     /**
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
      * @Rest\Delete("/users/{id}")
      */
@@ -85,25 +91,27 @@ class UserController extends Controller
         }
     }
     /**
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
      * @Rest\View()
      * @Rest\Put("/users/{id}")
      */
-    public function updateUserAction(Request $request)
+    public function updateUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        return $this->updateUser($request, true);
+        return $this->updateUser($request, true, $passwordEncoder);
     }
 
 
     /**
-     * @Rest\View()
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
+     * @Rest\View(serializerGroups={"oneUser"})
      * @Rest\Patch("/users/{id}")
      */
-    public function patchUserAction(Request $request)
+    public function patchUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        return $this->updateUser($request, false);
+        return $this->updateUser($request, false, $passwordEncoder);
     }
 
-    private function updateUser(Request $request, $clearMissing, UserPasswordEncoderInterface $passwordEncoder)
+    private function updateUser(Request $request, $clearMissing, $passwordEncoder)
     {
         $user = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:User')

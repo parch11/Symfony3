@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest; 
 use AppBundle\Entity\Product;
 use AppBundle\Form\ProductType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use AppBundle\Entity\User;
 
 class ProductController extends Controller
 {
@@ -46,6 +49,7 @@ class ProductController extends Controller
         return $product;
     }
     /**
+     * @Security("is_granted('ROLE_USER')")
      * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"oneProduct"})
      * @Rest\Post("/products")
      */
@@ -67,10 +71,11 @@ class ProductController extends Controller
         }
     }
     /**
+     * @Security("is_granted('ROLE_ADMIN') or product.getUser() == user")
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
      * @Rest\Delete("/products/{id}")
      */
-    public function removeProductAction(Request $request)
+    public function removeProductAction(Request $request, Product $product)
     {
         $em = $this->get('doctrine.orm.entity_manager');
         $product = $em->getRepository('AppBundle:Product')
@@ -83,20 +88,22 @@ class ProductController extends Controller
         }
     }
     /**
+     * @Security("is_granted('ROLE_ADMIN') or product.getUser() == user")
      * @Rest\View()
      * @Rest\Put("/products/{id}")
      */
-    public function updateProductAction(Request $request)
+    public function updateProductAction(Request $request, Product $product)
     {
         return $this->updateProduct($request, true);
     }
 
 
     /**
-     * @Rest\View()
+     * @Security("is_granted('ROLE_ADMIN') or product.getUser() == user")
+     * @Rest\View(serializerGroups={"oneProduct"})
      * @Rest\Patch("/products/{id}")
      */
-    public function patchProductAction(Request $request)
+    public function patchProductAction(Request $request, Product $product)
     {
         return $this->updateProduct($request, false);
     }

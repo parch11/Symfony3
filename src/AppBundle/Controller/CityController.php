@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest; 
 use AppBundle\Entity\City;
 use AppBundle\Form\CityType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class CityController extends Controller
 {
@@ -47,6 +49,7 @@ class CityController extends Controller
         return $city;
     }
     /**
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
      * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"oneCity"})
      * @Rest\Post("/cities")
      */
@@ -66,6 +69,7 @@ class CityController extends Controller
         }
     }
     /**
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
      * @Rest\Delete("/cities/{id}")
      */
@@ -82,6 +86,7 @@ class CityController extends Controller
         }
     }
     /**
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
      * @Rest\View()
      * @Rest\Put("/cities/{id}")
      */
@@ -92,7 +97,8 @@ class CityController extends Controller
 
 
     /**
-     * @Rest\View()
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
+     * @Rest\View(serializerGroups={"oneCity"})
      * @Rest\Patch("/cities/{id}")
      */
     public function patchCityAction(Request $request)

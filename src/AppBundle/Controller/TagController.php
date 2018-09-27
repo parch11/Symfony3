@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest; 
 use AppBundle\Entity\Tag;
 use AppBundle\Form\TagType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class TagController extends Controller
 {
@@ -47,6 +49,7 @@ class TagController extends Controller
         return $tag;
     }
     /**
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
      * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"oneTag"})
      * @Rest\Post("/tags")
      */
@@ -66,6 +69,7 @@ class TagController extends Controller
         }
     }
     /**
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
      * @Rest\Delete("/tags/{id}")
      */
@@ -82,6 +86,7 @@ class TagController extends Controller
         }
     }
     /**
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
      * @Rest\View()
      * @Rest\Put("/tags/{id}")
      */
@@ -92,7 +97,8 @@ class TagController extends Controller
 
 
     /**
-     * @Rest\View()
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
+     * @Rest\View(serializerGroups={"oneTag"})
      * @Rest\Patch("/tags/{id}")
      */
     public function patchTagAction(Request $request)

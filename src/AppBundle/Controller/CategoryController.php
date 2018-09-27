@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest; 
 use AppBundle\Entity\Category;
 use AppBundle\Form\CategoryType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class CategoryController extends Controller
 {
@@ -47,6 +49,7 @@ class CategoryController extends Controller
         return $category;
     }
     /**
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
      * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"oneCat"})
      * @Rest\Post("/categories")
      */
@@ -66,6 +69,7 @@ class CategoryController extends Controller
         }
     }
     /**
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
      * @Rest\Delete("/categories/{id}")
      */
@@ -82,6 +86,7 @@ class CategoryController extends Controller
         }
     }
     /**
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
      * @Rest\View()
      * @Rest\Put("/categories/{id}")
      */
@@ -92,7 +97,8 @@ class CategoryController extends Controller
 
 
     /**
-     * @Rest\View()
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
+     * @Rest\View(serializerGroups={"oneCat"})
      * @Rest\Patch("/categories/{id}")
      */
     public function patchCategoryAction(Request $request)
