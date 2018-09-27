@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends Controller
 {
     /**
-     * @Rest\View(serializerGroups={"allUser"})
+     * @Rest\View(serializerGroups={"allUsers"})
      * @Rest\Get("/users")
      */
     public function getUsersAction(Request $request)
