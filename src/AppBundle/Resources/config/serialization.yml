@@ -19,13 +19,13 @@ AppBundle\Entity\User:
 AppBundle\Entity\Product:
     attributes:
         id:
-            groups: ['oneUser', 'oneProduct', 'allProducts', 'oneCat', 'oneCity']
+            groups: ['oneUser', 'oneProduct', 'allProducts', 'oneCat', 'oneCity', 'oneTag']
         title:
-            groups: ['oneUser', 'oneProduct', 'allProducts', 'oneCat', 'oneCity']
+            groups: ['oneUser', 'oneProduct', 'allProducts', 'oneCat', 'oneCity', 'oneTag']
         description:
             groups: ['oneProduct']
         image:
-            groups: ['oneUser', 'oneProduct', 'allProducts', 'oneCat']
+            groups: ['oneUser', 'oneProduct', 'allProducts', 'oneCat', 'oneCity', 'oneTag']
         ref:
             groups: ['oneUser', 'oneProduct', 'allProducts']
         createdAt:
@@ -35,7 +35,7 @@ AppBundle\Entity\Product:
         city:
             groups: ['oneProduct', 'allProducts']
         tags:
-            groups: ['oneProduct']
+            groups: ['oneProduct', 'allProducts']
         category:
             groups: ['oneUser', 'oneProduct']
         user:
@@ -62,6 +62,15 @@ AppBundle\Entity\City:
             groups: ['oneCity', 'oneProduct']
         products:
             groups: ['oneCity']
+
+AppBundle\Entity\Tag:
+    attributes:
+        id:
+            groups: ['allTags', 'oneTag', 'oneProduct', 'allProducts']
+        name:
+            groups: ['allTags', 'oneTag', 'oneProduct', 'allProducts']
+        products:
+            groups: ['oneTag']
 
 # EXEMPLE :
 
