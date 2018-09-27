@@ -47,7 +47,7 @@ class CityController extends Controller
         return $city;
     }
     /**
-     * @Rest\View(statusCode=Response::HTTP_CREATED)
+     * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"oneCity"})
      * @Rest\Post("/cities")
      */
     public function postCitiesAction(Request $request)

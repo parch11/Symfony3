@@ -47,7 +47,7 @@ class CategoryController extends Controller
         return $category;
     }
     /**
-     * @Rest\View(statusCode=Response::HTTP_CREATED)
+     * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"oneCat"})
      * @Rest\Post("/categories")
      */
     public function postCategoriesAction(Request $request)

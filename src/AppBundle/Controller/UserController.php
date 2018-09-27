@@ -48,7 +48,7 @@ class UserController extends Controller
         return $user;
     }
     /**
-     * @Rest\View(statusCode=Response::HTTP_CREATED)
+     * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"oneUser"})
      * @Rest\Post("/users")
      */
     public function postUsersAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)

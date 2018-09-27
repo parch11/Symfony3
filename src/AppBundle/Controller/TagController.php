@@ -47,7 +47,7 @@ class TagController extends Controller
         return $tag;
     }
     /**
-     * @Rest\View(statusCode=Response::HTTP_CREATED)
+     * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"oneTag"})
      * @Rest\Post("/tags")
      */
     public function postTagsAction(Request $request)
