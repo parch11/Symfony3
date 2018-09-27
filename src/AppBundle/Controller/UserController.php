@@ -90,9 +90,24 @@ class UserController extends Controller
      */
     public function updateUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
+        return $this->updateUser($request, true);
+    }
+
+
+    /**
+     * @Rest\View()
+     * @Rest\Patch("/users/{id}")
+     */
+    public function patchUserAction(Request $request)
+    {
+        return $this->updateUser($request, false);
+    }
+
+    private function updateUser(Request $request, $clearMissing)
+    {
         $user = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:User')
-            ->find($request->get('id')); 
+            ->find($request->get('id'));
         /* @var $user User */
 
         if (empty($user)) {
@@ -101,7 +116,7 @@ class UserController extends Controller
 
         $form = $this->createForm(UserType::class, $user);
 
-        $form->submit($request->request->all());
+        $form->submit($request->request->all(), $clearMissing);
 
         if ($form->isValid()) {
             $em = $this->get('doctrine.orm.entity_manager');
