@@ -34,22 +34,22 @@ class UserController extends Controller
 
 
     /**
-     * @Security("is_granted('ROLE_SUPER_ADMIN')")
+     * @Security("is_granted('ROLE_SUPER_ADMIN') or userTarget == user")
      * @Rest\View(serializerGroups={"oneUser"})
-     * @Rest\Get("/users/{user_id}")
+     * @Rest\Get("/users/{id}")
      */
-    public function getUserAction(Request $request)
+    public function getUserAction(Request $request, User $userTarget)
     {
-        $user = $this->get('doctrine.orm.entity_manager')
+        $userTarget = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:User')
-            ->find($request->get('user_id'));
-        /* @var $user User */
+            ->find($request->get('id'));
+        /* @var $userTarget User */
 
-        if (empty($user)) {
+        if (empty($userTarget)) {
             return new JsonResponse(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
         }
 
-        return $user;
+        return $userTarget;
     }
     /**
      * @Security("is_granted('ROLE_SUPER_ADMIN')")
@@ -102,11 +102,11 @@ class UserController extends Controller
 
 
     /**
-     * @Security("is_granted('ROLE_SUPER_ADMIN')")
+     * @Security("is_granted('ROLE_SUPER_ADMIN') or userTarget == user")
      * @Rest\View(serializerGroups={"oneUser"})
      * @Rest\Patch("/users/{id}")
      */
-    public function patchUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function patchUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, User $userTarget)
     {
         return $this->updateUser($request, false, $passwordEncoder);
     }
