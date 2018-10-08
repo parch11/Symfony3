@@ -1,0 +1,29 @@
+{% block header %}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="blockMain">
+
+        {% if is_granted("ROLE_USER") %}
+        {% set mainMenu = [
+        {'path': 'index', 'name': 'Home' },
+        {'path': 'security_logout','name': 'logout'}
+        ] %}
+        {% else %}
+        {% set mainMenu = [
+        {'path': 'index', 'name': 'Home' },
+        {'path': 'security_login', 'name': 'Login' }
+        ] %}
+        {% endif %}
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                {% for item in mainMenu %}
+                <li {{ app.request.get('_route') == item['path'] ? ' class="active"' : '' }}>
+                    <a href="{{ path(item['path']) }}">{{ item['name'] }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!--/.navbar-collapse -->
+    </div>
+</div>
+{% endblock %}
