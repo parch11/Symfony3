@@ -8,7 +8,9 @@
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
     </head>
     <body>
-        {% include 'Navbar/navbar.html.twig' %}
+            {{ render(controller(
+            'AppBundle:Navbar:index'
+            )) }}
         {% block body %}{% endblock %}
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
