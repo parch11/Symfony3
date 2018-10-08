@@ -5,22 +5,28 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class CityType extends AbstractType
+class ApiUserType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('address')->add('contactMessage');
+        $builder
+        ->add('username')
+        ->add('plainPassword')
+        ->add('email')
+        ->add('isActive')
+        ->add('role', TextType ::class, array('mapped' => false));
     }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\City',
+            'data_class' => 'AppBundle\Entity\User',
             'csrf_protection' => false
         ));
     }
@@ -30,7 +36,7 @@ class CityType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_city';
+        return 'appbundle_user';
     }
 
 

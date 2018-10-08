@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest; 
 use AppBundle\Entity\Product;
-use AppBundle\Form\ProductType;
+use AppBundle\Form\ApiProductType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\User;
@@ -56,7 +56,7 @@ class ApiProductController extends Controller
     public function postProductsAction(Request $request)
     {
         $product = new Product();
-        $form = $this->createForm(ProductType::class, $product);
+        $form = $this->createForm(ApiProductType::class, $product);
         $form->submit($request->request->all());
         if ($form->isValid()) {
             $em = $this->get('doctrine.orm.entity_manager');
@@ -119,7 +119,7 @@ class ApiProductController extends Controller
             return new JsonResponse(['message' => 'Product not found'], Response::HTTP_NOT_FOUND);
         }
 
-        $form = $this->createForm(ProductType::class, $product);
+        $form = $this->createForm(ApiProductType::class, $product);
 
         $form->submit($request->request->all(), $clearMissing);
 

@@ -6,29 +6,21 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProductType extends AbstractType
+class ApiCityType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-        ->add('title')
-        ->add('description')
-        ->add('image')
-        ->add('ref')
-        ->add('city')
-        ->add('tags')
-        ->add('category')
-        ->add('user');
+        $builder->add('name')->add('address')->add('contactMessage');
     }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Product',
+            'data_class' => 'AppBundle\Entity\City',
             'csrf_protection' => false
         ));
     }
@@ -38,9 +30,8 @@ class ProductType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_product';
+        return 'appbundle_city';
     }
 
 
 }
-
