@@ -16,7 +16,11 @@
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNav">
+        <a class="navbar-brand" href="{{path('index')}}">
+            <img src="{{ asset('Logo-Le-Parchemin.png') }}" style="width : auto; max-height : 30px" alt="">
+        </a>
         <ul class="navbar-nav mr-auto">
             {% for category in categories %}
                 <li {{ currentUrl == '/category/' ~ category.id ? ' class="nav-item nav-active"' : 'class="nav-item"' }}>
