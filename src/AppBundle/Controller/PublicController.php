@@ -27,7 +27,7 @@ class PublicController extends Controller
 
         $products = $em->getRepository('AppBundle:Product')->findByCategory($category);
 
-        return $this->render('Product/showCategoryProducts.html.twig', array(
+        return $this->render('Public/showCategoryProducts.html.twig', array(
             'categoryName' => $category->getName(),
             'products' => $products,
         ));
@@ -41,7 +41,7 @@ class PublicController extends Controller
      */
     public function showAction(Product $product)
     {
-        return $this->render('Product/show.html.twig', array(
+        return $this->render('Public/show.html.twig', array(
             'product' => $product,
         ));
     }
@@ -53,7 +53,7 @@ class PublicController extends Controller
      */
     public function showTagProductsAction(Tag $tag)
     {
-        return $this->render('Product/showTagProducts.html.twig', array(
+        return $this->render('Public/showTagProducts.html.twig', array(
             'tag' => $tag,
         ));
     }

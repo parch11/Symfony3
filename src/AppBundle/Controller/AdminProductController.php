@@ -51,6 +51,8 @@ class AdminProductController extends Controller
 
         return $this->render('AdminProduct/index.html.twig', array(
             'products' => $products,
+            'onlyCreated' => true,
+            'username' => $user->getUsername(),
         ));
     }
 
