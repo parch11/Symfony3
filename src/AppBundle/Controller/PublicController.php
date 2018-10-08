@@ -17,7 +17,7 @@ class PublicController extends Controller
     /**
      * Finds and displays all products from the selected category.
      *
-     * @Route("category/{id}", name="products_show")
+     * @Route("category/{id}", name="category_products")
      * @Method("GET")
      */
     public function showCategoryProductsAction(Category $category)
