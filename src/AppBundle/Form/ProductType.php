@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ProductType extends AbstractType
 {
@@ -16,7 +17,7 @@ class ProductType extends AbstractType
         $builder
         ->add('title')
         ->add('description')
-        ->add('image')
+        ->add('imageFile', VichFileType::class)
         ->add('updatedAt')
         ->add('ref')
         ->add('createdAt')
