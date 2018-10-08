@@ -86,23 +86,6 @@ class AdminProductController extends Controller
     }
 
     /**
-     * Finds and displays a product entity.
-     *
-     * @Security("is_granted('ROLE_USER')")
-     * @Route("/{id}", name="admin_product_show")
-     * @Method("GET")
-     */
-    public function showAction(Product $product)
-    {
-        $deleteForm = $this->createDeleteForm($product);
-
-        return $this->render('AdminProduct/show.html.twig', array(
-            'product' => $product,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
      * Displays a form to edit an existing product entity.
      *
      * @Security("is_granted('ROLE_ADMIN') or product.getUser() == user")
