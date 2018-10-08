@@ -7,10 +7,10 @@
     <div id="tableID" class="table-list-container">
         <table class="table-list table" data-currentpage="1" style="height:268px;">
             <thead class="thead-dark">
-                <th class="sort" data-sort="title" style="cursor: pointer;">Title ▼</th>
+                <th class="sort" data-sort="title" style="cursor: pointer;">Titre ▼</th>
                 <th>Image</th>
-                <th class="sort" data-sort="ref" style="cursor: pointer;">Ref ▼</th>
-                <th class="sort" data-sort="createdAt" style="cursor: pointer;">Createdat ▼</th>
+                <th class="sort" data-sort="ref" style="cursor: pointer;">Référence ▼</th>
+                <th class="sort" data-sort="createdAt" style="cursor: pointer;">Date de création ▼</th>
                 <th>Actions</th>
             </thead>
     
@@ -28,7 +28,7 @@
                                 <a class="btn btn-primary" href="{{ path('product_show', { 'id': product.id }) }}">Voir</a>
                             </li>
                             <li class="list-inline-item">
-                                <a class="btn btn-warning" href="{{ path('admin_product_edit', { 'id': product.id }) }}">éditer</a>
+                                <a class="btn btn-warning" href="{{ path('admin_product_edit', { 'id': product.id }) }}">Editer</a>
                             </li>
                         </ul>
                     </td>
