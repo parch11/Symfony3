@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Product
@@ -44,6 +45,12 @@ class Product
     private $image;
 
     /**
+     *  @Assert\Image(
+     *     maxSize = "1900k",
+     *     mimeTypes = {"image/jpeg", "image/png"},
+     *     mimeTypesMessage = "Mauvais format d'image",
+     *     maxSizeMessage = "L'image de doit pas dépasser 1.9Mo"
+     * )
      * @Vich\UploadableField(mapping="product_images", fileNameProperty="image")
      * @var File
      */
