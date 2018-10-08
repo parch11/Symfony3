@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% if products is empty %}
+    <p>Aucun produit n'est actuellment disponnible dans la catégorie "{{ categoryName }}"</p>
+{% else %}    
+<div class="card-columns">
+    {% for product in products %}
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{ path_product_images }}{{ product.image }}" alt="{{ product.image }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.title }}</h5>
+                <p class="card-text">
+                    Tags associés :
+                        {% for tag in product.tags %}
+                            <a href="{{ path('tag_products', { 'id': tag.id }) }}" class="btn btn-outline-primary">{{ tag.name }}</a>
+                        {% endfor %}
+                </p>
+                <a href="{{ path('product_show', { 'id': product.id }) }}" class="btn btn-primary">Afficher les détails</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
