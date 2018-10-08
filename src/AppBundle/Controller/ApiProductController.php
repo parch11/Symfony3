@@ -14,11 +14,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\User;
 
-class ProductController extends Controller
+class ApiProductController extends Controller
 {
     /**
      * @Rest\View(serializerGroups={"allProducts"})
-     * @Rest\Get("/products")
+     * @Rest\Get("/api/products")
      */
     public function getProductsAction(Request $request)
     {
@@ -33,7 +33,7 @@ class ProductController extends Controller
 
     /**
      * @Rest\View(serializerGroups={"oneProduct"})
-     * @Rest\Get("/products/{product_id}")
+     * @Rest\Get("/api/products/{product_id}")
      */
     public function getProductAction(Request $request)
     {
@@ -51,7 +51,7 @@ class ProductController extends Controller
     /**
      * @Security("is_granted('ROLE_USER')")
      * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"oneProduct"})
-     * @Rest\Post("/products")
+     * @Rest\Post("/api/products")
      */
     public function postProductsAction(Request $request)
     {
@@ -73,7 +73,7 @@ class ProductController extends Controller
     /**
      * @Security("is_granted('ROLE_ADMIN') or product.getUser() == user")
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
-     * @Rest\Delete("/products/{id}")
+     * @Rest\Delete("/api/products/{id}")
      */
     public function removeProductAction(Request $request, Product $product)
     {
@@ -90,7 +90,7 @@ class ProductController extends Controller
     /**
      * @Security("is_granted('ROLE_ADMIN') or product.getUser() == user")
      * @Rest\View()
-     * @Rest\Put("/products/{id}")
+     * @Rest\Put("/api/products/{id}")
      */
     public function updateProductAction(Request $request, Product $product)
     {
@@ -101,7 +101,7 @@ class ProductController extends Controller
     /**
      * @Security("is_granted('ROLE_ADMIN') or product.getUser() == user")
      * @Rest\View(serializerGroups={"oneProduct"})
-     * @Rest\Patch("/products/{id}")
+     * @Rest\Patch("/api/products/{id}")
      */
     public function patchProductAction(Request $request, Product $product)
     {
