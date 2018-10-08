@@ -1,12 +1,14 @@
-{% if is_granted("ROLE_USER") %}
+{% if is_granted("ROLE_SUPER_ADMIN") %}
     {% set mainMenu = [
-    {'path': 'index', 'name': 'Home' },
-    {'path': 'security_logout','name': 'logout'}
+    {'path': 'admin_product_created', 'name': 'Gestion de mes produits' },
     ] %}
-{% else %}
+{% elseif is_granted("ROLE_ADMIN") %}
     {% set mainMenu = [
-    {'path': 'index', 'name': 'Home' },
-    {'path': 'security_login', 'name': 'Login' }
+    {'path': 'admin_product_created', 'name': 'Gestion de mes produits' },
+    ] %}
+{% elseif is_granted("ROLE_USER") %}
+    {% set mainMenu = [
+    {'path': 'admin_product_created', 'name': 'Gestion de mes produits' },
     ] %}
 {% endif %}
 <nav class="navbar navbar-expand-lg navbar-light nav-bg-color">
@@ -18,12 +20,22 @@
                 </li>
             {% endfor %}
         </ul>
-        <ul class="navbar-nav">
-            {% for item in mainMenu %}
-            <li currentUrl == item['path'] ? ' class="nav-item active"' : 'class="nav-item"' }}>
-                <a class="nav-link" href="{{ path(item['path']) }}">{{ item['name'] }}</a>
-            </li>
-            {% endfor %}
-        </ul>
+        {% if mainMenu is defined %}
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle nav-color" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        Admin
+                    </a>
+                    <div class="dropdown-menu nav-bg-color" aria-labelledby="navbarDropdown">
+                        {% for item in mainMenu %}
+                            <a class="dropdown-item nav-color" href="{{ path(item['path']) }}">{{ item['name'] }}</a>
+                        {% endfor %}
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item nav-color" href="{{ path('security_logout') }}">Déconnexion</a>
+                    </div>
+                </li>
+            </ul>
+        {% endif %}
     </div>
 </nav>
