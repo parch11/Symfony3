@@ -1,51 +1,64 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Products list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
+{% if onlyCreated is defined %}
+    <h1>Liste des produits mis en ligne par {{ username }}</h1>
+{% endif %}
+    <div id="tableID" class="table-list-container">
+        <table class="table-list table" data-currentpage="1" style="height:268px;">
+            <thead class="thead-dark">
+                <th class="sort" data-sort="title">Title ▼</th>
                 <th>Image</th>
-                <th>Updatedat</th>
-                <th>Ref</th>
-                <th>Createdat</th>
-                <th>Autodeleteat</th>
+                <th class="sort" data-sort="ref">Ref ▼</th>
+                <th class="sort" data-sort="createdAt">Createdat ▼</th>
                 <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for product in products %}
-            <tr>
-                <td><a href="{{ path('admin_product_show', { 'id': product.id }) }}">{{ product.id }}</a></td>
-                <td>{{ product.title }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.image }}</td>
-                <td>{% if product.updatedAt %}{{ product.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ product.ref }}</td>
-                <td>{% if product.createdAt %}{{ product.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if product.autoDeleteAt %}{{ product.autoDeleteAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('admin_product_show', { 'id': product.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('admin_product_edit', { 'id': product.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('admin_product_new') }}">Create a new product</a>
+            </thead>
+    
+            <!-- IMPORTANT, class="list" must be on tbody -->
+            <tbody class="list">
+            {% for product in products %}
+                <tr>
+                    <td class="title">{{ product.title }}</td>
+                    <td><img style="max-height : 5em; max-width : 5em" src="{{ path_product_images }}{{ product.image }}" alt="{{ product.image }}"></td>
+                    <td class="ref">{{ product.ref }}</td>
+                    <td class="createdAt">{% if product.createdAt %}{{ product.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>
+                        <ul class="list-unstyled inline-list">
+                            <li class="list-inline-item">
+                                <a class="btn btn-primary" href="{{ path('admin_product_show', { 'id': product.id }) }}">show</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="btn btn-warning" href="{{ path('admin_product_edit', { 'id': product.id }) }}">edit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    <ul class="list-unstyled inline-list">
+        <li class="list-inline-item">
+            <button type="button" class="jPaginateBack btn btn-outline-primary">Précédent</button>
+        </li>
+        <li class="list-inline-item">
+            <ul class="pagination"></ul>
+        </li>
+        <li class="list-inline-item">
+            <button type="button" class="jPaginateNext btn btn-outline-primary">Suivant</button>
+        </li>
+        <li class="list-inline-item">
+            <input class="search form-control" placeholder="Rechercher">
         </li>
     </ul>
+
+    
+    </div>
+    <div>
+        <a class="btn btn-primary" href="{{ path('admin_product_new') }}">Ajouter un produit</a>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+<script src="{{ asset('js/list.min.js') }}"></script>
+<script src="{{ asset('js/adminProduct.js') }}"></script>
 {% endblock %}
