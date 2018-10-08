@@ -18,11 +18,11 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         login:
-            pattern:  ^/login
+            pattern:  ^/api/login
             stateless: true
             anonymous: true
             json_login:
-                check_path: /login_check
+                check_path: /api/login_check
                 username_path: username
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
@@ -30,14 +30,30 @@ security:
                 require_previous_session: false
 
         api:
-            pattern: ^/
+            pattern: ^/api
             stateless: true
             anonymous: true
             provider: entity_provider
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
-
+        main:
+            pattern:    ^/
+            http_basic: ~
+            provider: entity_provider
+            anonymous: ~
+            form_login:
+                check_path: security_login
+                login_path: security_login
+                # Securisation des formulaires
+                csrf_token_generator: security.csrf.token_manager
+                # La page par defaut apres une connexion reussie
+                default_target_path: admin
+            logout:
+                # La route où se trouve le process de deconnexion
+                path: security_logout
+                # La route sur laquelle doit etre rediriger l'utilisateur apres une deconnexion
+                target: index
         # register:
         #     pattern:  ^/register
         #     stateless: true

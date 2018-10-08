@@ -19,7 +19,8 @@ class UserType extends AbstractType
         ->add('plainPassword')
         ->add('email')
         ->add('isActive')
-        ->add('role', TextType ::class, array('mapped' => false));
+        ->add('roles');
+        // ->add('role', TextType ::class, array('mapped' => false));
     }/**
      * {@inheritdoc}
      */
