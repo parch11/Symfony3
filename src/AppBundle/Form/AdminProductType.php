@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 
-class ProductType extends AbstractType
+class AdminProductType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -24,8 +24,7 @@ class ProductType extends AbstractType
         ->add('autoDeleteAt')
         ->add('city')
         ->add('tags')
-        ->add('category')
-        ->add('user');
+        ->add('category');
     }/**
      * {@inheritdoc}
      */

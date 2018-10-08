@@ -16,7 +16,7 @@ use AppBundle\Entity\User;
  *
  * @Route("admin/product")
  */
-class ProductController extends Controller
+class AdminProductController extends Controller
 {
     /**
      * Lists all product entities.
@@ -31,7 +31,7 @@ class ProductController extends Controller
 
         $products = $em->getRepository('AppBundle:Product')->findAll();
 
-        return $this->render('product/index.html.twig', array(
+        return $this->render('AdminProduct/index.html.twig', array(
             'products' => $products,
         ));
     }
@@ -49,7 +49,7 @@ class ProductController extends Controller
         $user = $this->getUser();
         $products = $em->getRepository('AppBundle:Product')->findByUser($user);
 
-        return $this->render('product/index.html.twig', array(
+        return $this->render('AdminProduct/index.html.twig', array(
             'products' => $products,
         ));
     }
@@ -64,10 +64,12 @@ class ProductController extends Controller
     public function newAction(Request $request)
     {
         $product = new Product();
-        $form = $this->createForm('AppBundle\Form\ProductType', $product);
+        $form = $this->createForm('AppBundle\Form\AdminProductType', $product);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $product->setUser($user);
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);
             $em->flush();
@@ -75,7 +77,7 @@ class ProductController extends Controller
             return $this->redirectToRoute('admin_product_show', array('id' => $product->getId()));
         }
 
-        return $this->render('product/new.html.twig', array(
+        return $this->render('AdminProduct/new.html.twig', array(
             'product' => $product,
             'form' => $form->createView(),
         ));
@@ -92,7 +94,7 @@ class ProductController extends Controller
     {
         $deleteForm = $this->createDeleteForm($product);
 
-        return $this->render('product/show.html.twig', array(
+        return $this->render('AdminProduct/show.html.twig', array(
             'product' => $product,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -108,7 +110,7 @@ class ProductController extends Controller
     public function editAction(Request $request, Product $product)
     {
         $deleteForm = $this->createDeleteForm($product);
-        $editForm = $this->createForm('AppBundle\Form\ProductType', $product);
+        $editForm = $this->createForm('AppBundle\Form\AdminProductType', $product);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -117,7 +119,7 @@ class ProductController extends Controller
             return $this->redirectToRoute('admin_product_edit', array('id' => $product->getId()));
         }
 
-        return $this->render('product/edit.html.twig', array(
+        return $this->render('AdminProduct/edit.html.twig', array(
             'product' => $product,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
