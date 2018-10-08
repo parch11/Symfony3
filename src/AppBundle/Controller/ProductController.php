@@ -21,7 +21,7 @@ class ProductController extends Controller
     /**
      * Lists all product entities.
      *
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Route("/", name="admin_product_index")
      * @Method("GET")
      */
