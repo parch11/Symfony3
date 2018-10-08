@@ -260,6 +260,17 @@ class Product
     {
         return $this->image;
     }
+    public function getUpdatedAt() : ? \DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $createdAt) : self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
     //--------------------------
     // -- VICH UPLOADER END ---- 
     //--------------------------
