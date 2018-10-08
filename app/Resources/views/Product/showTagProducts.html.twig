@@ -4,6 +4,7 @@
 {% if tag is empty %}
     <p>Aucun produit n'est actuellment disponnible avec le tag "{{ tag.name }}"</p>
 {% else %}    
+<div class="card-columns">
     {% for product in tag.products %}
         <div class="card" style="width: 18rem;">
             <img class="card-img-top" src="{{ path_product_images }}{{ product.image }}" alt="{{ product.image }}">
@@ -19,5 +20,6 @@
             </div>
         </div>
     {% endfor %}
+</div>
 {% endif %}
 {% endblock %}
