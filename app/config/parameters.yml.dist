@@ -21,3 +21,4 @@ parameters:
     jwt_private_key_path: '%kernel.root_dir%/../var/jwt/private.pem' # ssh private key path
     jwt_public_key_path:  '%kernel.root_dir%/../var/jwt/public.pem'  # ssh public key path
     jwt_token_ttl:        3600
+    app.path.product_images: /uploads/images/products
