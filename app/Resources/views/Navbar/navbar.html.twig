@@ -9,12 +9,12 @@
     {'path': 'security_login', 'name': 'Login' }
     ] %}
 {% endif %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light nav-bg-color">
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             {% for category in categories %}
                 <li {{ currentUrl == '/category/' ~ category.id ? ' class="nav-item active"' : 'class="nav-item"' }}>
-                    <a class="nav-link" href="{{ '/category/' ~ category.id }}">{{ category.name }}</a>
+                    <a class="nav-link nav-color" href="{{ '/category/' ~ category.id }}">{{ category.name }}</a>
                 </li>
             {% endfor %}
         </ul>

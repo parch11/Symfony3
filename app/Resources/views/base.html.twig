@@ -6,12 +6,17 @@
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/navbar.css') }}" />
+
     </head>
     <body>
+        <div class="container">
+
             {{ render(controller(
-            'AppBundle:Navbar:index'
-            )) }}
-        {% block body %}{% endblock %}
+                'AppBundle:Navbar:index'
+                )) }}
+                {% block body %}{% endblock %}
+        </div>
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         {% block javascripts %}{% endblock %}

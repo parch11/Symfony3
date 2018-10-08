@@ -1,0 +1,13 @@
+.nav-bg-color {
+    background-color: rgb(7, 150, 124);
+}
+
+.nav-color {
+    color: rgb(246, 182, 0) !important;
+}
+.nav-color:hover {
+    background-color: rgb(8, 109, 90) !important;
+}
+.active{
+    background-color: rgb(8, 109, 90) !important;
+}
