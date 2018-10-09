@@ -107,7 +107,7 @@ class AdminProductController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('admin_product_edit', array('id' => $product->getId()));
+            return $this->redirectToRoute('admin_product_created');
         }
 
         return $this->render('AdminProduct/edit.html.twig', array(
