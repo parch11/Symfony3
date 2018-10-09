@@ -13,7 +13,10 @@ class AdminCategoryType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name');
+        $builder->add('name', null, array(
+            'label' => "Titre de la catégorie",
+            'attr' => array('class' => 'form-control')
+        ));
     }/**
      * {@inheritdoc}
      */

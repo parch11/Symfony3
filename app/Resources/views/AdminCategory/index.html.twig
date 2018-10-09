@@ -2,39 +2,23 @@
 {% block title %}Admin - Liste des catégories{% endblock %}
 
 {% block body %}
-    <h1>Categories list</h1>
+    <h1>Gestion des catégories</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="row">
         {% for category in categories %}
-            <tr>
-                <td><a href="{{ path('admin_categories_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
-                <td>{{ category.name }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('admin_categories_show', { 'id': category.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('admin_categories_edit', { 'id': category.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ category.name }}</h5>
+                        <a class="btn btn-sm btn-outline-primary" href="{{ '/category/' ~ category.id }}">Voir les produits</a>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-warning" href="{{ path('admin_categories_edit', { 'id': category.id }) }}">Editer</a>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
+    </div>
+            <a class="btn btn-primary" href="{{ path('admin_categories_new') }}">Ajouter une nouvelle catégorie</a>
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_categories_new') }}">Create a new category</a>
-        </li>
-    </ul>
 {% endblock %}

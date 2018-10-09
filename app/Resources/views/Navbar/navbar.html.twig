@@ -1,9 +1,12 @@
 {% if is_granted("ROLE_SUPER_ADMIN") %}
     {% set mainMenu = [
-    {'path': 'admin_product_created', 'name': 'Gestion de mes produits' },
+    {'path': 'admin_product_index', 'name': 'Gestion de tout les produits' },
+    {'path': 'admin_product_created', 'name': 'Gestion de mes produits <div class="dropdown-divider"></div>' },
+    {'path': 'admin_categories_index', 'name': 'Gestion des catégories' },
     ] %}
 {% elseif is_granted("ROLE_ADMIN") %}
     {% set mainMenu = [
+    {'path': 'admin_product_index', 'name': 'Gestion de tout les produits' },
     {'path': 'admin_product_created', 'name': 'Gestion de mes produits' },
     ] %}
 {% elseif is_granted("ROLE_USER") %}
@@ -24,7 +27,7 @@
         <ul class="navbar-nav mr-auto">
             {% for category in categories %}
                 <li {{ currentUrl == '/category/' ~ category.id ? ' class="nav-item nav-active"' : 'class="nav-item"' }}>
-                    <a class="nav-link nav-color" href="{{ '/category/' ~ category.id }}">{{ category.name }}</a>
+                    <a class="nav-link nav-color" href="{{ '/category/' ~ category.id }}">{{ category.name | raw }}</a>
                 </li>
             {% endfor %}
         </ul>
@@ -37,7 +40,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right nav-bg-color" aria-labelledby="navbarDropdown">
                         {% for item in mainMenu %}
-                            <a class="dropdown-item nav-color" href="{{ path(item['path']) }}">{{ item['name'] }}</a>
+                            <a class="dropdown-item nav-color" href="{{ path(item['path']) }}">{{ item['name'] | raw }}</a>
                         {% endfor %}
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item nav-color" href="{{ path('security_logout') }}">Déconnexion</a>
