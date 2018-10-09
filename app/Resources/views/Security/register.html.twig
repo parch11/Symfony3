@@ -3,12 +3,14 @@
 
 {% block body %}
     {{ form_start(form) }}
-    {{ form_row(form.fullName) }}
     {{ form_row(form.username) }}
     {{ form_row(form.email) }}
-    {{ form_row(form.password.first) }}
-    {{ form_row(form.password.second) }}
+    {{ form_row(form.plainPassword.first) }}
+    {{ form_row(form.plainPassword.second) }}
+    {{ form_row(form.role) }}
+    {{ form_row(form.isActive) }}
 
-    <button type="submit">S'inscrire !</button>
+    <br />
+    <button class="btn btn-primary" type="submit">Création du compte</button>
     {{ form_end(form) }}
 {% endblock %}

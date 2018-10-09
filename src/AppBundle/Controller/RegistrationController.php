@@ -2,9 +2,9 @@
 // src/Controller/RegistrationController.php
 namespace AppBundle\Controller;
 
-use App\Form\UserType;
-use App\Entity\User;
-use App\Events;
+use AppBundle\Form\UserType;
+use AppBundle\Entity\User;
+use AppBundle\Events;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,17 +26,15 @@ class RegistrationController extends Controller
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+            //hash du password
+            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
-            // Par defaut l'utilisateur aura toujours le rôle ROLE_USER
-            $user->setRoles(['ROLE_USER']);
-            // On enregistre l'utilisateur dans la base
+            // Role
+            $user->addRole($request->request->get("appbundle_user")["role"]);
+            // Enregistrement dans la base
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-            //On déclenche l'event
-            $event = new GenericEvent($user);
-            $eventDispatcher->dispatch(Events::USER_REGISTERED, $event);
             return $this->redirectToRoute('security_login');
         }
         return $this->render(
