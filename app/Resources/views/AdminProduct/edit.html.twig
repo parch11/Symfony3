@@ -25,10 +25,12 @@
         <div class="form-group">
             <div class="form-row">
                 <div class="col-md-8 mb-2">
+                    <span class="text-danger font-weight-bold">{{ form_errors(form.title) }}</span>
                     {{ form_label(form.title) }}
                     {{ form_widget(form.title) }}
                 </div>
                 <div class="col-md-4 mb-2">
+                    <span class="text-danger font-weight-bold">{{ form_errors(form.autoDeleteAt) }}</span>
                     {{ form_label(form.autoDeleteAt) }}
                     {{ form_widget(form.autoDeleteAt) }}
                 </div>
@@ -37,14 +39,17 @@
         <div class="form-group">
             <div class="form-row">
                 <div class="col-md-4 mb-3">
+                    <span class="text-danger font-weight-bold">{{ form_errors(form.category) }}</span>
                     {{ form_label(form.category) }}
                     {{ form_widget(form.category) }}
                 </div>
                 <div class="col-md-4 mb-3">
+                    <span class="text-danger font-weight-bold">{{ form_errors(form.city) }}</span>
                     {{ form_label(form.city) }}
                     {{ form_widget(form.city) }}
                 </div>
                 <div class="col-md-4 mb-3">
+                    <span class="text-danger font-weight-bold">{{ form_errors(form.ref) }}</span>
                     {{ form_label(form.ref) }}
                     {{ form_widget(form.ref) }}
                 </div>
@@ -53,6 +58,7 @@
         <div class="form-group">
             <div class="form-row">
                 <div class="col-md-8 mb-2">
+                    <span class="text-danger font-weight-bold">{{ form_errors(form.description) }}</span>
                     {{ form_label(form.description) }}
                     {{ form_widget(form.description) }}
                 </div>
@@ -67,6 +73,7 @@
                             <img class="card-img-top" id="imagepreview" src="{{ path_product_images }}{{ product.image }}" alt="Aperçu du produit" />
                         {% endif %}
                         <div class="card-body">
+                            <span class="text-danger font-weight-bold">{{ form_errors(form.imageFile) }}</span>
                             {{ form_widget(form.imageFile) }}
                         </div>
                     </div>
@@ -74,6 +81,7 @@
             </div>
         </div>
         <div class="form-group">
+            <span class="text-danger font-weight-bold">{{ form_errors(form.tags) }}</span>
             {{ form_label(form.tags) }}
             {% for tag in form.tags|batch(10) %}
                 <div class="form-group">
@@ -102,5 +110,5 @@
 
 {% endblock %}
 {% block javascripts %}
-<script src="{{ asset('js/adminEditProduct.js') }}"></script>
+    <script src="{{ asset('js/adminEditProduct.js') }}"></script>
 {% endblock %}
