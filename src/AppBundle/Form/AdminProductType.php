@@ -21,7 +21,7 @@ class AdminProductType extends AbstractType
         ))
         ->add('description', null, array(
             'label' => "Déscription du produit",
-            'attr' => array('class' => 'form-control', 'rows' => '8')
+            'attr' => array('class' => 'form-control', 'rows' => '10')
         ))
         ->add('imageFile', VichFileType::class, array(
             'required' => false,

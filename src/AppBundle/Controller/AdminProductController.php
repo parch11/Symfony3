@@ -84,9 +84,10 @@ class AdminProductController extends Controller
             return $this->redirectToRoute('admin_product_created');
         }
 
-        return $this->render('AdminProduct/new.html.twig', array(
+        return $this->render('AdminProduct/edit.html.twig', array(
             'product' => $product,
             'form' => $form->createView(),
+            'new' => true,
         ));
     }
 
@@ -111,7 +112,7 @@ class AdminProductController extends Controller
 
         return $this->render('AdminProduct/edit.html.twig', array(
             'product' => $product,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
