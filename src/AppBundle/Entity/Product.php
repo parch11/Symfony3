@@ -269,12 +269,12 @@ class Product
     }
     public function getUpdatedAt() : ? \DateTimeInterface
     {
-        return $this->createdAt;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $createdAt) : self
+    public function setUpdatedAt(\DateTimeInterface $updatedAt) : self
     {
-        $this->createdAt = $createdAt;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
