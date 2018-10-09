@@ -5,7 +5,11 @@
 
 <div class="card text-center">
     <div class="card-header">
-        <img class="card-img-top" src="{{ path_product_images }}{{ product.image }}" alt="{{ product.image }}" style="max-height : 20em; width : auto">
+        {% if product.image is empty %}
+            <img style="max-height : 20em; width : auto" class="card-img-top" src="{{ asset("aucun_apercu.png") }}" alt="Aucun aperçu">
+        {% else %}
+            <img style="max-height : 20em; width : auto" class="card-img-top" src="{{ path_product_images }}{{ product.image }}" alt="Aperçu du produit">
+        {% endif %}
     </div>
     <div class="card-body">
         <h5 class="card-title">{{ product.title }}</h5>
