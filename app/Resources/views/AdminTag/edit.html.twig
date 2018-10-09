@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block title %}Admin - Edition d'un tag{% endblock %}
+
+{% block body %}
+    <h1>Edition du tag : {{ tag.name}} </h1>
+
+    {{ form_start(form) }}
+    <div class="d-flex justify-content-between">
+        <input class="btn btn-primary" type="submit" value="Enregistrer" />
+        <a class="btn btn-danger" href="{{ path('admin_tag_index') }}">Abandonner</a>
+    </div>
+    <div class="form-group">
+        <span class="text-danger font-weight-bold">{{ form_errors(form.name) }}</span>
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name) }}
+    </div>
+    {{ form_end(form) }}
+
+
+    {{ form_start(delete_form) }}
+        <input class="btn btn-danger" type="submit" value="Supprimer">
+        <p class="text-danger">***Le tag sera automatiquement enlevé des produits associés.</p>
+    {{ form_end(delete_form) }}
+
+
+{% endblock %}
