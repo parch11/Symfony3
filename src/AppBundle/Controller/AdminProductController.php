@@ -66,9 +66,14 @@ class AdminProductController extends Controller
     public function newAction(Request $request)
     {
         $product = new Product();
+
+        $startDate = new \DateTime('now');
+        $endDate = new \DateTime('+14 day');
+        $product->setCreatedAt($startDate)->setUpdatedAt($startDate)->setAutoDeleteAt($endDate);
+        
         $form = $this->createForm('AppBundle\Form\AdminProductType', $product);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
             $product->setUser($user);
@@ -76,7 +81,7 @@ class AdminProductController extends Controller
             $em->persist($product);
             $em->flush();
 
-            return $this->redirectToRoute('admin_product_show', array('id' => $product->getId()));
+            return $this->redirectToRoute('admin_product_created');
         }
 
         return $this->render('AdminProduct/new.html.twig', array(
