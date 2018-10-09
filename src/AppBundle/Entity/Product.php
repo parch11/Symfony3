@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Count;
 
 /**
  * Product
@@ -87,6 +88,7 @@ class Product
     private $city;
 
     /**
+     * @Count(min = 1, minMessage = "Au moins 1 tag doit être sélectionné")
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="products")
      */
     private $tags;
