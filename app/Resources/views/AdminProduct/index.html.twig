@@ -19,7 +19,11 @@
             {% for product in products %}
                 <tr>
                     <td class="title">{{ product.title }}</td>
-                    <td><img style="max-height : 5em; max-width : 5em" src="{{ path_product_images }}{{ product.image }}" alt="{{ product.image }}"></td>
+                    {% if product.image is empty %}
+                        <td><img style="max-height : 5em; max-width : 5em" src="{{ asset("aucun_apercu.png") }}" alt="{{ product.image }}"></td>
+                    {% else %}
+                        <td><img style="max-height : 5em; max-width : 5em" src="{{ path_product_images }}{{ product.image }}" alt="{{ product.image }}"></td>
+                    {% endif %}
                     <td class="ref">{{ product.ref }}</td>
                     <td class="createdAt">{% if product.createdAt %}{{ product.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>
