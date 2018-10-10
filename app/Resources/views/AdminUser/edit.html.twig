@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {% if new is defined %}
+        Admin - Création d'un utilisateur
+    {% else %}
+        Admin - Edition d'un utilisateur
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% if new is defined %}
+        <h1>Création d'un compte utilisateur</h1>
+    {% else %}
+        <h1>Edition du compte utilisateur : {{ user.username}}</h1>
+        <h3>Niveau d'autorisation : 
+            {% if "ROLE_SUPER_ADMIN" in user.roles %}
+                {{ "Administrateur" }}
+            {% elseif "ROLE_ADMIN" in user.roles %}
+                {{ "Encadrant technique" }}
+            {% elseif "ROLE_USER" in user.roles %}
+                {{ "Utilisateur" }}
+            {% endif %}
+        </h3>
+    {% endif %}
+    {{ form_start(form) }}
+        <div class="d-flex justify-content-between">
+            {% if new is defined %}
+                <button class="btn btn-primary" type="submit">Création du compte</button>
+            {% else %}
+                <input class="btn btn-primary" type="submit" value="Enregistrer" />
+                <a class="btn btn-info" href="{{ path('admin_user_role', { 'id': user.id }) }}">Modifier le niveau d'autorisation</a>
+                <a class="btn btn-info" href="{{ path('admin_user_password', { 'id': user.id }) }}">Modifier le mot de passe</a>
+            {% endif %}
+            <a class="btn btn-danger" href="{{ path('admin_user_index') }}">Abandonner</a>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.username) }}
+            <span class="text-danger font-weight-bold">{{ form_errors(form.username) }}</span>
+            {{ form_widget(form.username) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.email) }}
+            <span class="text-danger font-weight-bold">{{ form_errors(form.email) }}</span>
+            {{ form_widget(form.email) }}
+        </div>
+        {% if new is defined %}
+            <div class="form-group">
+                {{ form_label(form.plainPassword.first) }}
+                <span class="text-danger font-weight-bold">{{ form_errors(form.plainPassword.first) }}</span>
+                {{ form_widget(form.plainPassword.first) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.plainPassword.second) }}
+                <span class="text-danger font-weight-bold">{{ form_errors(form.plainPassword.second) }}</span>
+                {{ form_widget(form.plainPassword.second) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.role) }}
+                <span class="text-danger font-weight-bold">{{ form_errors(form.role) }}</span>
+                {{ form_widget(form.role) }}
+            </div>
+        {% endif %}
+        <div class="form-check">
+            {{ form_widget(form.isActive) }}
+            {{ form_label(form.isActive, null, {
+                'label_attr': {'class': 'form-check-label'} })
+            }}
+            <span class="text-danger font-weight-bold">{{ form_errors(form.isActive) }}</span>
+        </div>
+    {{ form_end(form) }}
+
+    {% if delete_form is defined %}
+        <div><br />
+            {{ form_start(delete_form) }}
+                <input class="btn btn-danger" type="submit" value="Supprimer le compte utilisateur">
+            {{ form_end(delete_form) }}
+        </div>
+    {% endif %}
+
+{% endblock %}
