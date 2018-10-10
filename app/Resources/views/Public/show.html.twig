@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ product.title }}{% endblock %}
+
+{% block body %}
+
+<div class="card text-center">
+    <div class="card-header">
+        {% if product.image is empty %}
+            <img style="max-height : 20em; width : auto" class="card-img-top" src="{{ asset("aucun_apercu.png") }}" alt="Aucun aperçu">
+        {% else %}
+            <img style="max-height : 20em; width : auto" class="card-img-top" src="{{ path_product_images }}{{ product.image }}" alt="Aperçu du produit">
+        {% endif %}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ product.title }}</h5>
+        <p class="card-text">{{ product.description }}</p>
+    </div>
+    <div class="card-header">
+        <p class="card-text">Disponnible à {{ product.city.address }}</p>
+        <p class="card-text">{{ product.city.contactMessage }}</p>
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+            <a href="{{ path('category_products', { 'id': product.category.id }) }}" class="btn btn-primary">{{ product.category.name }}</a>
+        </p>
+        <p class="card-text">
+            Tags associés :<br />
+            {% for tag in product.tags %}
+                <a href="{{ path('tag_products', { 'id': tag.id }) }}" class="btn btn-outline-primary">{{ tag.name }}</a>
+            {% endfor %}
+        </p>
+    </div>
+    <div class="card-footer text-muted">
+        Réf : {{ product.ref }} | Mis en ligne le {{ product.createdAt|date("d/m/Y") }}
+    </div>
+</div>
+{% endblock %}

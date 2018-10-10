@@ -1,0 +1,38 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    
+}
+.wrapper {
+    min-height: 95%;
+    position: relative;
+}
+footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: -5%;
+    background-color: rgb(7, 150, 124);
+    color: rgb(246, 182, 0) !important;
+    justify-content: center !important;
+}
+.footer-link a:link {
+    color: rgb(246, 182, 0) !important;
+    text-decoration: none;
+}
+
+.footer-link a:visited {
+    color: rgb(246, 182, 0) !important;
+    text-decoration: none;
+}
+
+.footer-link a:hover {
+    color: rgb(246, 182, 0) !important;
+    text-decoration: underline;
+}
+
+.footer-link a:active {
+    color: rgb(246, 182, 0) !important;
+    text-decoration: none;
+}

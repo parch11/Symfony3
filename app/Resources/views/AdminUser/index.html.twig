@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+{% block title %}Admin - Gestion des utilisateurs{% endblock %}
+{% block body %}
+    <h1>Gestion des comptes utilisateurs</h1>
+
+<section id="tag-list">
+    <div class="row list">
+        {% for user in users %}
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                <div class="card h-100 text-center">
+                    {% if user.isActive %}
+                        <div class="card-header bg-success">
+                    {% else %}
+                        <div class="card-header bg-danger">
+                    {% endif %}
+                        <h5 class="card-title name">{{ user.username }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text email">{{ user.email }}</p>
+                        <small class="card-text role">
+                            {% if "ROLE_SUPER_ADMIN" in user.roles  %}
+                                {{ "Administrateur" }}
+                            {% elseif "ROLE_ADMIN" in user.roles %}
+                                {{ "Encadrant technique" }}
+                            {% elseif "ROLE_USER" in user.roles %}
+                                {{ "Utilisateur" }}
+                            {% endif %}
+                        </small>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-warning" href="{{ path('admin_user_edit', { 'id': user.id }) }}">Editer</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <ul class="list-unstyled inline-list">
+        <li class="list-inline-item">
+            <button type="button" class="jPaginateBack btn btn-outline-primary">Précédent</button>
+        </li>
+        <li class="list-inline-item">
+            <ul class="pagination"></ul>
+        </li>
+        <li class="list-inline-item">
+            <button type="button" class="jPaginateNext btn btn-outline-primary">Suivant</button>
+        </li>
+        <li class="list-inline-item">
+            <input class="search form-control" placeholder="Rechercher">
+        </li>
+    </ul>
+</section>
+
+
+    <a class="btn btn-primary" href="{{ path('admin_user_new') }}">Créer un compte utilisateur</a>
+
+
+{% endblock %}
+{% block javascripts %}
+<script src="{{ asset('js/list.min.js') }}"></script>
+<script src="{{ asset('js/adminUser.js') }}"></script>
+{% endblock %}

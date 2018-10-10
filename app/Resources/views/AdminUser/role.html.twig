@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+        Admin - Modification de niveau d'autorisation d'un utilisateur ; {{ user.username }}
+{% endblock %}
+
+{% block body %}
+    <h1>Modification de niveau d'autorisation d'un utilisateur : {{ user.username }}</h1>
+
+    {{ form_start(form) }}
+        <div class="d-flex justify-content-between">
+            <input class="btn btn-primary" type="submit" value="Enregistrer" />
+                    <h2>Actuel :
+                        {% if "ROLE_SUPER_ADMIN" in user.roles %}
+                            {{ "Administrateur" }}
+                        {% elseif "ROLE_ADMIN" in user.roles %}
+                            {{ "Encadrant technique" }}
+                        {% elseif "ROLE_USER" in user.roles %}
+                            {{ "Utilisateur" }}
+                        {% endif %}</h2>
+            <a class="btn btn-danger" href="{{ path('admin_user_edit', { 'id': user.id }) }}">Abandonner</a>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.role) }}
+            <span class="text-danger font-weight-bold">{{ form_errors(form.role) }}</span>
+            {{ form_widget(form.role) }}
+        </div>
+
+
+    {{ form_end(form) }}
+
+{% endblock %}

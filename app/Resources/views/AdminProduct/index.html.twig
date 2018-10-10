@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+{% block title %}Admin - Liste des produits{% endblock %}
+{% block body %}
+    {% if onlyCreated is defined %}
+        <h1>Liste des produits mis en ligne par {{ username }}</h1>
+    {% else %}
+        <h1>Liste de tout les produits mis en ligne</h1>
+    {% endif %}
+    <div id="tableID" class="table-list-container">
+        <table class="table-list table" data-currentpage="1" style="height:268px;">
+            <thead class="thead-dark">
+                <th class="sort" data-sort="title" style="cursor: pointer;">Titre ▼</th>
+                <th>Image</th>
+                <th class="sort" data-sort="ref" style="cursor: pointer;">Référence ▼</th>
+                <th class="sort" data-sort="createdAt" style="cursor: pointer;">Date de création ▼</th>
+                <th>Actions</th>
+            </thead>
+    
+            <!-- IMPORTANT, class="list" must be on tbody -->
+            <tbody class="list">
+            {% for product in products %}
+                <tr>
+                    <td class="title">{{ product.title }}</td>
+                    {% if product.image is empty %}
+                        <td><img style="max-height : 5em; max-width : 5em" src="{{ asset("aucun_apercu.png") }} "alt="Aucun aperçu"></td>
+                    {% else %}
+                        <td><img style="max-height : 5em; max-width : 5em" src="{{ path_product_images }}{{ product.image }}" alt="Aperçu du produit"></td>
+                    {% endif %}
+                    <td class="ref">{{ product.ref }}</td>
+                    <td class="createdAt">{% if product.createdAt %}{{ product.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>
+                        <ul class="list-unstyled inline-list">
+                            <li class="list-inline-item">
+                                <a class="btn btn-primary" href="{{ path('product_show', { 'id': product.id }) }}">Voir</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="btn btn-warning" href="{{ path('admin_product_edit', { 'id': product.id }) }}">Editer</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    <ul class="list-unstyled inline-list">
+        <li class="list-inline-item">
+            <button type="button" class="jPaginateBack btn btn-outline-primary">Précédent</button>
+        </li>
+        <li class="list-inline-item">
+            <ul class="pagination"></ul>
+        </li>
+        <li class="list-inline-item">
+            <button type="button" class="jPaginateNext btn btn-outline-primary">Suivant</button>
+        </li>
+        <li class="list-inline-item">
+            <input class="search form-control" placeholder="Rechercher">
+        </li>
+    </ul>
+
+    
+    </div>
+    <div>
+        <a class="btn btn-primary" href="{{ path('admin_product_new') }}">Ajouter un produit</a>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+<script src="{{ asset('js/list.min.js') }}"></script>
+<script src="{{ asset('js/adminProduct.js') }}"></script>
+{% endblock %}

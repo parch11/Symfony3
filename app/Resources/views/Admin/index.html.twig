@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% block title %}Admin - Tableau de bord{% endblock %}
+
+{% block body %}
+<h3>Bonjour {{ app.user.username }}</h3>
+
+{% if is_granted("ROLE_SUPER_ADMIN") %}
+    {% set mainMenu = [
+        {'path': 'admin_product_index', 'name': 'Gestion de tout les produits' },
+        {'path': 'admin_product_created', 'name': 'Gestion de mes produits' },
+        {'path': 'admin_user_index', 'name': 'Gestion des utilisateurs' },
+        {'path': 'admin_categories_index', 'name': 'Gestion des catégories' },
+        {'path': 'admin_city_index', 'name': 'Gestion des villes' },
+        {'path': 'admin_tag_index', 'name': 'Gestion des tags' },
+        {'path': 'user_password', 'name': 'Modifier mon mot de passe' },
+    ] %}
+{% elseif is_granted("ROLE_ADMIN") %}
+    {% set mainMenu = [
+        {'path': 'admin_product_index', 'name': 'Gestion de tout les produits' },
+        {'path': 'admin_product_created', 'name': 'Gestion de mes produits' },
+        {'path': 'user_password', 'name': 'Modifier mon mot de passe' },
+    ] %}
+{% elseif is_granted("ROLE_USER") %}
+    {% set mainMenu = [
+        {'path': 'admin_product_created', 'name': 'Gestion de mes produits' },
+        {'path': 'user_password', 'name': 'Modifier mon mot de passe' },
+    ] %}
+{% endif %}
+<div class="row">
+{% for item in mainMenu %}
+    <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+        <div class="card h-100 text-center">
+            <div class="card-header" style="height : 40%">
+                <h5 class="card-title">{{ item['name'] | raw }}</h5>
+            </div>
+            <div class="card-body">
+                <a class="btn btn-primary" href="{{ path(item['path']) }}">Accéder</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+{% endblock %}

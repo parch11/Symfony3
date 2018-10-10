@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+{% block title %}Tag : {{ tag.name }}{% endblock %}
+
+{% block body %}
+{% if tag is empty %}
+    <p>Aucun produit n'est actuellment disponnible avec le tag "{{ tag.name }}"</p>
+{% else %} 
+<section id="product-list">
+    <div class="form-group">
+        <br />
+        <input class="search form-control" placeholder="Rechercher avec le tag {{ tag.name }}">
+    </div>
+
+    <div class="row list">
+        {% for product in tag.products %}
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                <div class="card h-100 text-center">
+                    <div class="card-header" style="height : 45%">
+                        {% if product.image is empty %}
+                            <img style="max-height : 100%; max-width : 100%" src="{{ asset("aucun_apercu.png") }}" alt="Aucun aperçu">
+                        {% else %}
+                            <img style="max-height : 100%; max-width : 100%" src="{{ path_product_images }}{{ product.image }}" alt="Aperçu du produit">
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title name">{{ product.title }}</h5>
+                        <p class="card-text">
+                            Tags associés : <br />
+                                {% for tag in product.tags %}
+                                    <a href="{{ path('tag_products', { 'id': tag.id }) }}" class="btn btn-sm btn-outline-primary">{{ tag.name }}</a>
+                                {% endfor %}
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ path('product_show', { 'id': product.id }) }}" class="btn btn-primary">Afficher les détails</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="text-center">
+        <ul class="list-unstyled inline-list">
+            <li class="list-inline-item">
+                <button type="button" class="jPaginateBack btn btn-outline-primary">Précédent</button>
+            </li>
+            <li class="list-inline-item">
+                <ul class="pagination"></ul>
+            </li>
+            <li class="list-inline-item">
+                <button type="button" class="jPaginateNext btn btn-outline-primary">Suivant</button>
+            </li>
+        </ul>
+    </div>
+</section>
+{% endif %}
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/list.min.js') }}"></script>
+    <script src="{{ asset('js/product.js') }}"></script>
+{% endblock %}

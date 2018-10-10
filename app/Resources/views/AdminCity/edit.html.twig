@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block title %}Admin - Edition d'une ville{% endblock %}
+
+{% block body %}
+    <h1>Edition de la ville : {{ city.name}} </h1>
+
+    {{ form_start(form) }}
+    <div class="d-flex justify-content-between">
+        <input class="btn btn-primary" type="submit" value="Enregistrer" />
+        <a class="btn btn-danger" href="{{ path('admin_city_index') }}">Abandonner</a>
+    </div>
+    <div class="form-group">
+        <span class="text-danger font-weight-bold">{{ form_errors(form.name) }}</span>
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name) }}
+    </div>
+    <div class="form-group">
+        <span class="text-danger font-weight-bold">{{ form_errors(form.address) }}</span>
+        {{ form_label(form.address) }}
+        {{ form_widget(form.address) }}
+    </div>
+    <div class="form-group">
+        <span class="text-danger font-weight-bold">{{ form_errors(form.contactMessage) }}</span>
+        {{ form_label(form.contactMessage) }}
+        {{ form_widget(form.contactMessage) }}
+    </div>
+    {{ form_end(form) }}
+
+
+    {{ form_start(delete_form) }}
+        <input class="btn btn-danger" type="submit" value="Supprimer">
+        <p class="text-danger">* Pour pouvoir pouvoir supprimer une ville, il faut qu'aucun produit ne lui soit associé.</p>
+    {{ form_end(delete_form) }}
+
+        </li>
+    </ul>
+{% endblock %}

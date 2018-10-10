@@ -63,6 +63,11 @@ class User implements UserInterface
         // $this->salt = md5(uniqid('', true));
     }
 
+    public function __toString()
+    {
+        return $this->getUsername();
+    }
+
     /**
      * @ORM\Column(type="array")
      */
