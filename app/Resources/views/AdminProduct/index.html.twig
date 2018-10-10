@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 {% block title %}Admin - Liste des produits{% endblock %}
 {% block body %}
-{% if onlyCreated is defined %}
-    <h1>Liste des produits mis en ligne par {{ username }}</h1>
-{% endif %}
+    {% if onlyCreated is defined %}
+        <h1>Liste des produits mis en ligne par {{ username }}</h1>
+    {% else %}
+        <h1>Liste de tout les produits mis en ligne</h1>
+    {% endif %}
     <div id="tableID" class="table-list-container">
         <table class="table-list table" data-currentpage="1" style="height:268px;">
             <thead class="thead-dark">
