@@ -1,5 +1,41 @@
 {% extends 'base.html.twig' %}
+{% block title %}Accueil{% endblock %}
 {% block body %}
-
-Accueil
+<div class="text-center">
+    <br />
+    <img src="https://picsum.photos/500/200" alt="Image de démonstration">
+</div>
+<br />
+<h2>Bienvenu sur notre site vitrine ! </h2>
+<p>Texte de présentation ...</p>
+<p>Lien vers le site wordpress...</p>
+<h2>Nos derniers produits mis en ligne</h2>
+<div class="row">
+    {% for product in products %}
+    <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+        <div class="card h-100 text-center">
+            <div class="card-header" style="height : 45%">
+                {% if product.image is empty %}
+                <img style="max-height : 100%; max-width : 100%" src="{{ asset("aucun_apercu.png") }}" alt="Aucun aperçu">
+                {% else %}
+                <img style="max-height : 100%; max-width : 100%" src="{{ path_product_images }}{{ product.image }}" alt="Aperçu du produit">
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title name">{{ product.title }}</h5>
+                <p class="card-text">
+                    Tags associés :<br />
+                    {% for tag in product.tags %}
+                    <a href="{{ path('tag_products', { 'id': tag.id }) }}" class="btn btn-sm btn-outline-primary">{{
+                        tag.name }}</a>
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="card-footer">
+                <a href="{{ path('product_show', { 'id': product.id }) }}" class="btn btn-primary">Afficher les détails</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
