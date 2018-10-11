@@ -1,3 +1,4 @@
+{# LIENS DISPONNIBLE DANS LA PARTIE ADMIN EN FONCTION DU ROLE #}
 {% if is_granted("ROLE_SUPER_ADMIN") %}
     {% set mainMenu = [
         {'path': 'admin_product_index', 'name': 'Gestion de tout les produits' },
@@ -20,16 +21,18 @@
         {'path': 'user_password', 'name': 'Modifier mon mot de passe' },
     ] %}
 {% endif %}
+{# DEBUT DE LA NAVBAR #}
 <nav class="navbar navbar-expand-lg navbar-light nav-bg-color">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarNav">
+        {# ZONE DU LOGO #}
         <a class="navbar-brand" href="{{path('index')}}">
             <img src="{{ asset('Logo-Le-Parchemin.png') }}" style="width : auto; max-height : 30px" alt="">
         </a>
+        {# ZONE DES CATEGORIES #}
         <ul class="navbar-nav mr-auto">
             {% for category in categories %}
                 <li {{ currentUrl == '/category/' ~ category.id ? ' class="nav-item nav-active"' : 'class="nav-item"' }}>
@@ -37,8 +40,28 @@
                 </li>
             {% endfor %}
         </ul>
-        {% if mainMenu is defined %}
-            <ul class="navbar-nav">
+        <ul class="navbar-nav">
+            {# ZONE DES TAGS #}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle nav-color" href="#" id="tagDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Tags
+                </a>
+                <section id="tag-nav-list">
+                    <div class="dropdown-menu dropdown-menu-right nav-tag" aria-labelledby="tagDropdown">
+                        <input class="search form-control" placeholder="Rechercher un tag"><br />
+                        <div class="list">
+                            {% for tag in tags %}
+                                <span>
+                                    <a href="{{ path('tag_products', { 'id': tag.id }) }}" class="btn btn-sm btn-outline-primary tagName">{{ tag.name }}</a>
+                                </span>
+                                {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            </li>
+            {# ZONE DU MENU ADMIN #}
+            {% if mainMenu is defined %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle nav-color text-uppercase" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
@@ -52,7 +75,7 @@
                         <a class="dropdown-item nav-color" href="{{ path('security_logout') }}">Déconnexion</a>
                     </div>
                 </li>
-            </ul>
-        {% endif %}
+            {% endif %}
+        </ul>
     </div>
 </nav>

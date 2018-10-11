@@ -13,3 +13,8 @@
     background-color: rgb(8, 109, 90) !important;
     border-radius: 5em;
 }
+.nav-tag {
+    height: auto;
+    width: 23em;
+    padding: 10px;
+}
