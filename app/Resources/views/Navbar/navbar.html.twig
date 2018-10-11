@@ -33,7 +33,7 @@
             <img src="{{ asset('Logo-Le-Parchemin.png') }}" style="width : auto; max-height : 30px" alt="">
         </a>
         {# ZONE DES CATEGORIES #}
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto text-capitalize">
             {% for category in categories %}
                 <li {{ currentUrl == '/category/' ~ category.id ? ' class="nav-item nav-active"' : 'class="nav-item"' }}>
                     <a class="nav-link nav-color" href="{{ '/category/' ~ category.id }}">{{ category.name | raw }}</a>
@@ -43,7 +43,7 @@
         <ul class="navbar-nav">
             {# ZONE DES TAGS #}
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle nav-color" href="#" id="tagDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle nav-color text-capitalize" href="#" id="tagDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     Tags
                 </a>
