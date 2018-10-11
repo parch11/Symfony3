@@ -13,6 +13,6 @@ window.addEventListener("load", function(){
             "message": "Ce site utilise des cookies pour améliorer votre navigation, pour plus d'information :",
             "dismiss": "C'est noté, merci",
             "link": "En savoir plus",
-            "href": "leparchemin.org/index.php/politique-de-cookie/"
+            "href": "http://leparchemin.org/index.php/politique-de-cookie/"
         }
     })});
