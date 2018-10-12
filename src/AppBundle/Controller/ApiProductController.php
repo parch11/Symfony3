@@ -59,6 +59,8 @@ class ApiProductController extends Controller
         $form = $this->createForm(ApiProductType::class, $product);
         $form->submit($request->request->all());
         if ($form->isValid()) {
+            $user = $this->get('security.token_storage')->getToken()->getUser();
+            $product->setUser($user);
             $em = $this->get('doctrine.orm.entity_manager');
             $startDate = new \DateTime('now');
             $endDate = new \DateTime('+14 day');
