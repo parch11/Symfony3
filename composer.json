@@ -24,6 +24,7 @@
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
         "friendsofsymfony/rest-bundle": "^2.4",
+        "hshn/base64-encoded-file": "^1.2",
         "incenteev/composer-parameter-handler": "^2.0",
         "lexik/jwt-authentication-bundle": "^2.5",
         "nelmio/cors-bundle": "^1.5",
