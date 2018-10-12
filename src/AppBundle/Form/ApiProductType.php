@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ApiProductType extends AbstractType
 {
@@ -16,12 +17,13 @@ class ApiProductType extends AbstractType
         $builder
         ->add('title')
         ->add('description')
-        ->add('image')
+        ->add('imageFile', VichFileType::class, array(
+            'required' => false,
+        ))
         ->add('ref')
         ->add('city')
         ->add('tags')
-        ->add('category')
-        ->add('user');
+        ->add('category');
     }/**
      * {@inheritdoc}
      */
