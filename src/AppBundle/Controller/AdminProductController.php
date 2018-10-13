@@ -55,7 +55,24 @@ class AdminProductController extends Controller
             'username' => $user->getUsername(),
         ));
     }
+    /**
+     * Lists all product entities created by one user.
+     *
+     * @Security("is_granted('ROLE_SUPER_ADMIN')")
+     * @Route("/user/{id}/created", name="admin_product_by_user")
+     * @Method("GET")
+     */
+    public function showUserProductAction(User $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $products = $em->getRepository('AppBundle:Product')->findByUser($user);
 
+        return $this->render('AdminProduct/index.html.twig', array(
+            'products' => $products,
+            'onlyCreated' => true,
+            'username' => $user->getUsername(),
+        ));
+    }
     /**
      * Creates a new product entity.
      *
