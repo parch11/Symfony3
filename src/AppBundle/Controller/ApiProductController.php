@@ -32,7 +32,20 @@ class ApiProductController extends Controller
         
         return $products;
     }
+    /**
+     * @Rest\View(serializerGroups={"allProducts"})
+     * @Rest\Get("/api/products/created")
+     */
+    public function getProductsCreatedAction(Request $request)
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $products = $this->get('doctrine.orm.entity_manager')
+            ->getRepository('AppBundle:Product')
+            ->findByUser($user);
+        /* @var $products Product[] */
 
+        return $products;
+    }
 
     /**
      * @Rest\View(serializerGroups={"oneProduct"})
