@@ -16,6 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class ApiCityController extends Controller
 {
     /**
+     * @Security("is_granted('ROLE_USER')")
      * @Rest\View(serializerGroups={"allCities"})
      * @Rest\Get("/api/cities")
      */
@@ -32,6 +33,7 @@ class ApiCityController extends Controller
 
 
     /**
+     * @Security("is_granted('ROLE_USER')")
      * @Rest\View(serializerGroups={"oneCity"})
      * @Rest\Get("/api/cities/{city_id}")
      */

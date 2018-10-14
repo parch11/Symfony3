@@ -20,6 +20,7 @@ use Hshn\Base64EncodedFile\HttpFoundation\File\UploadedBase64EncodedFile;
 class ApiProductController extends Controller
 {
     /**
+     * @Security("is_granted('ROLE_USER')")
      * @Rest\View(serializerGroups={"allProducts"})
      * @Rest\Get("/api/products")
      */
@@ -33,6 +34,7 @@ class ApiProductController extends Controller
         return $products;
     }
     /**
+     * @Security("is_granted('ROLE_USER')")
      * @Rest\View(serializerGroups={"allProducts"})
      * @Rest\Get("/api/products/created")
      */
@@ -48,6 +50,7 @@ class ApiProductController extends Controller
     }
 
     /**
+     * @Security("is_granted('ROLE_USER')")
      * @Rest\View(serializerGroups={"oneProduct"})
      * @Rest\Get("/api/products/{product_id}")
      */

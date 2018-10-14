@@ -16,6 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class ApiTagController extends Controller
 {
     /**
+     * @Security("is_granted('ROLE_USER')")
      * @Rest\View(serializerGroups={"allTags"})
      * @Rest\Get("/api/tags")
      */
@@ -32,6 +33,7 @@ class ApiTagController extends Controller
 
 
     /**
+     * @Security("is_granted('ROLE_USER')")
      * @Rest\View(serializerGroups={"oneTag"})
      * @Rest\Get("/api/tags/{tag_id}")
      */

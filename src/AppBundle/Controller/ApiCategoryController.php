@@ -16,6 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class ApiCategoryController extends Controller
 {
     /**
+     * @Security("is_granted('ROLE_USER')")
      * @Rest\View(serializerGroups={"allCat"})
      * @Rest\Get("/api/categories")
      */
@@ -32,6 +33,7 @@ class ApiCategoryController extends Controller
 
 
     /**
+     * @Security("is_granted('ROLE_USER')")
      * @Rest\View(serializerGroups={"oneCat"})
      * @Rest\Get("/api/categories/{category_id}")
      */
