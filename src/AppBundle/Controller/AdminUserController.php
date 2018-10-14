@@ -79,17 +79,18 @@ class AdminUserController extends Controller
         $user->setPlainPassword("w0Sx10A+dD0cZ15S!Se54seTEA4");
         $editForm = $this->createForm('AppBundle\Form\AdminUserEditType', $user);
         $editForm->handleRequest($request);
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('admin_user_index');
         }
-
+        $currentUser = $this->getUser();
+        $canEditRole = ($currentUser == $user) ? false : true;
         return $this->render('AdminUser/edit.html.twig', array(
             'user' => $user,
             'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'canEditRole' => $canEditRole,
         ));
     }
 
@@ -101,23 +102,31 @@ class AdminUserController extends Controller
      */
     public function roleAction(Request $request, User $user)
     {
-        $user->setPlainPassword("w0Sx10A+dD0cZ15S!Se54seTEA4");
-        $editForm = $this->createForm('AppBundle\Form\AdminUserRoleType', $user);
-        $editForm->handleRequest($request);
+        $currentUser = $this->getUser();
+        $canEditRole = ($currentUser == $user) ? false : true;
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            // Role
-            $user->removeAllRoles();
-            $user->addRole($request->request->get("appbundle_user")["role"]);
-            $this->getDoctrine()->getManager()->flush();
+        if ($canEditRole) {
 
-            return $this->redirectToRoute('admin_user_edit', array( "id" => $user->getId()));
+            $user->setPlainPassword("w0Sx10A+dD0cZ15S!Se54seTEA4");
+            $editForm = $this->createForm('AppBundle\Form\AdminUserRoleType', $user);
+            $editForm->handleRequest($request);
+
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                // Role
+                $user->removeAllRoles();
+                $user->addRole($request->request->get("appbundle_user")["role"]);
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirectToRoute('admin_user_edit', array( "id" => $user->getId()));
+            }
+
+            return $this->render('AdminUser/role.html.twig', array(
+                'user' => $user,
+                'form' => $editForm->createView(),
+            ));
+        }else {
+            return $this->redirectToRoute('admin_user_edit', array("id" => $user->getId()));
         }
-
-        return $this->render('AdminUser/role.html.twig', array(
-            'user' => $user,
-            'form' => $editForm->createView(),
-        ));
     }
 
     /**

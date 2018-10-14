@@ -28,7 +28,12 @@
                 <button class="btn btn-primary" type="submit">Création du compte</button>
             {% else %}
                 <input class="btn btn-primary" type="submit" value="Enregistrer" />
-                <a class="btn btn-info" href="{{ path('admin_user_role', { 'id': user.id }) }}">Modifier le niveau d'autorisation</a>
+                {% if canEditRole %}
+                    <a class="btn btn-info" href="{{ path('admin_user_role', { 'id': user.id }) }}">Modifier le niveau d'autorisation</a>
+                {% else %}
+                    <button class="btn btn-info" disabled="disabled">Impossible de modifier son propre niveau d'autorisation</button>
+                {% endif %}
+                
                 <a class="btn btn-info" href="{{ path('admin_user_password', { 'id': user.id }) }}">Modifier le mot de passe</a>
             {% endif %}
             <a class="btn btn-danger" href="{{ path('admin_user_index') }}">Abandonner</a>
