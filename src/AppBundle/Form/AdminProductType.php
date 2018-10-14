@@ -25,6 +25,7 @@ class AdminProductType extends AbstractType
         ))
         ->add('imageFile', VichFileType::class, array(
             'required' => false,
+            'attr' => array('class' => 'custom-file-input', 'lang' => 'fr'),
         ))
         ->add('ref', null, array(
             'label' => "Référence de l'annonce",

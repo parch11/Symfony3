@@ -8,13 +8,15 @@
     {% endif %}
 {% endblock %}
 
+{% block stylesheets %}
+
+{% endblock %}
 {% block body %}
     {% if new is defined %}
         <h1>Mise en ligne d'un produit</h1>
     {% else %}
         <h1>Edition d'un produit</h1>    
     {% endif %}
-
 
     {{ form_start(form) }}
         <div class="d-flex justify-content-between">
@@ -74,7 +76,10 @@
                         {% endif %}
                         <div class="card-body">
                             <span class="text-danger font-weight-bold">{{ form_errors(form.imageFile) }}</span>
-                            {{ form_widget(form.imageFile) }}
+                            <div class="custom-file">
+                                {{ form_label(form.imageFile, 'Choix de l\'mage', {'label_attr': {'class': 'custom-file-label'}}) }}
+                                {{ form_widget(form.imageFile) }}
+                            </div>
                         </div>
                     </div>
                 </div>
