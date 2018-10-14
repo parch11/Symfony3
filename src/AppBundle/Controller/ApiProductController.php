@@ -76,10 +76,11 @@ class ApiProductController extends Controller
     {
         $product = new Product();
         $form = $this->createForm(ApiProductType::class, $product);
-        
-        $uploadedFile = new UploadedBase64EncodedFile(
-            new Base64EncodedFile($request->request->get("img"))
-        );
+        if ($request->request->get("img")) {
+            $uploadedFile = new UploadedBase64EncodedFile(
+                new Base64EncodedFile($request->request->get("img"))
+            );
+        }
         $form->submit($request->request->all());
         // return $request->request->all();
         if ($form->isValid()) {
@@ -90,9 +91,9 @@ class ApiProductController extends Controller
             $endDate = new \DateTime('+14 day');
             $product->setCreatedAt($startDate)->setUpdatedAt($startDate)->setAutoDeleteAt($endDate);
 
-
-            $product->setImageFile($uploadedFile);
-
+            if ($request->request->get("img")) {
+                $product->setImageFile($uploadedFile);
+            }
             $em->persist($product);
             $em->flush();
             return $product;
