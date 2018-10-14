@@ -27,11 +27,8 @@
     {{ form_end(form) }}
 
 
-    {{ form_start(delete_form) }}
-        <input class="btn btn-danger" type="submit" value="Supprimer">
-        <p class="text-danger">* Pour pouvoir pouvoir supprimer une ville, il faut qu'aucun produit ne lui soit associé.</p>
-    {{ form_end(delete_form) }}
-
-        </li>
-    </ul>
+    {% set deleteValue = "Supprimer la ville" %}
+    {% include 'Modal/delete.html.twig' %}
+    <p class="text-danger">* Pour pouvoir pouvoir supprimer une ville, il faut qu'aucun produit ne lui soit associé.</p>
+    
 {% endblock %}

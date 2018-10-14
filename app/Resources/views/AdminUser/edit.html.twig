@@ -78,10 +78,8 @@
     {% if delete_form is defined %}
     <br />
         <div class="d-flex justify-content-between">
-            
-            {{ form_start(delete_form) }}
-            <input class="btn btn-danger" type="submit" value="Supprimer le compte utilisateur">
-            {{ form_end(delete_form) }}
+            {% set deleteValue = "Supprimer le compte utilisateur" %}
+            {% include 'Modal/delete.html.twig' %}
             <a href="{{ path('admin_product_by_user', {'id': user.id }) }}" class="btn btn-outline-primary">Voir les produits mis en ligne par l'utilisateur</a>
         </div>
     {% endif %}

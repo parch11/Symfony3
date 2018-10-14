@@ -102,9 +102,8 @@
 
     {% if delete_form is defined %}
         <div><br />
-            {{ form_start(delete_form) }}
-                <input class="btn btn-danger" type="submit" value="Supprimer l'annonce">
-            {{ form_end(delete_form) }}
+            {% set deleteValue = "Supprimer le produit" %}
+            {% include 'Modal/delete.html.twig' %}
         </div>
     {% endif %}
 

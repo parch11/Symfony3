@@ -17,10 +17,8 @@
     {{ form_end(form) }}
 
 
-    {{ form_start(delete_form) }}
-        <input class="btn btn-danger" type="submit" value="Supprimer">
-        <p class="text-danger">***Le tag sera automatiquement enlevé des produits associés.</p>
-    {{ form_end(delete_form) }}
-
+    {% set deleteValue = "Supprimer le tag" %}
+    {% include 'Modal/delete.html.twig' %}
+    <p class="text-danger">***Le tag sera automatiquement enlevé des produits associés.</p>
 
 {% endblock %}
