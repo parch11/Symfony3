@@ -30,6 +30,7 @@ class Tag
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Product", mappedBy="tags")
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $products;
 

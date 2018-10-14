@@ -28,7 +28,7 @@ class ApiProductController extends Controller
     {
         $products = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:Product')
-            ->findAll();
+            ->findAll(array(), array('createdAt' => 'DESC'));
         /* @var $products Product[] */
         
         return $products;
@@ -43,7 +43,7 @@ class ApiProductController extends Controller
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $products = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:Product')
-            ->findByUser($user);
+            ->findByUser($user, array('createdAt' => 'DESC'));
         /* @var $products Product[] */
 
         return $products;

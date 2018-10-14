@@ -29,7 +29,7 @@ class AdminProductController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $products = $em->getRepository('AppBundle:Product')->findAll();
+        $products = $em->getRepository('AppBundle:Product')->findAll(array(), array('createdAt' => 'DESC'));
 
         return $this->render('AdminProduct/index.html.twig', array(
             'products' => $products,
@@ -47,7 +47,7 @@ class AdminProductController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $products = $em->getRepository('AppBundle:Product')->findByUser($user);
+        $products = $em->getRepository('AppBundle:Product')->findByUser($user, array('createdAt' => 'DESC'));
 
         return $this->render('AdminProduct/index.html.twig', array(
             'products' => $products,
@@ -65,7 +65,7 @@ class AdminProductController extends Controller
     public function showUserProductAction(User $user)
     {
         $em = $this->getDoctrine()->getManager();
-        $products = $em->getRepository('AppBundle:Product')->findByUser($user);
+        $products = $em->getRepository('AppBundle:Product')->findByUser($user, array('createdAt' => 'DESC'));
 
         return $this->render('AdminProduct/index.html.twig', array(
             'products' => $products,

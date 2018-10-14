@@ -25,7 +25,7 @@ class PublicController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $products = $em->getRepository('AppBundle:Product')->findByCategory($category);
+        $products = $em->getRepository('AppBundle:Product')->findByCategory($category, array('createdAt' => 'DESC'));
 
         return $this->render('Public/showCategoryProducts.html.twig', array(
             'categoryName' => $category->getName(),
