@@ -29,13 +29,13 @@ AppBundle\Entity\Product:
         ref:
             groups: ['oneUser', 'oneProduct', 'allProducts']
         createdAt:
-            groups: ['oneUser', 'oneProduct']
+            groups: ['oneUser', 'oneProduct', 'allProducts']
         autoDeleteAt:
             groups: ['oneUser','oneProduct']
         city:
-            groups: ['oneProduct', 'allProducts']
+            groups: ['oneProduct']
         tags:
-            groups: ['oneProduct', 'allProducts']
+            groups: ['oneProduct']
         category:
             groups: ['oneUser', 'oneProduct']
         user:
