@@ -111,7 +111,7 @@ class ApiProductController extends Controller
     {
         $em = $this->get('doctrine.orm.entity_manager');
         $product = $em->getRepository('AppBundle:Product')
-            ->find($request->get('uuid'));
+            ->findOneByUuid($request->get('uuid'));
         /* @var $product Product */
 
         if ($product) {
