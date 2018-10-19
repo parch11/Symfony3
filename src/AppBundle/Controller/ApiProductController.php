@@ -52,13 +52,13 @@ class ApiProductController extends Controller
     /**
      * @Security("is_granted('ROLE_ADMIN') or product.getUser() == user")
      * @Rest\View(serializerGroups={"oneProduct"})
-     * @Rest\Get("/api/products/{product_uuid}")
+     * @Rest\Get("/api/products/{uuid}")
      */
-    public function getProductAction(Request $request)
+    public function getProductAction(Request $request, Product $product)
     {
         $product = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:Product')
-            ->findOneByUuid($request->get('product_uuid'));
+            ->findOneByUuid($request->get('uuid'));
         /* @var $product Product */
 
         if (empty($product)) {
@@ -119,16 +119,6 @@ class ApiProductController extends Controller
             $em->flush();
         }
     }
-    /**
-     * @Security("is_granted('ROLE_ADMIN') or product.getUser() == user")
-     * @Rest\View()
-     * @Rest\Put("/api/products/{uuid}")
-     */
-    public function updateProductAction(Request $request, Product $product)
-    {
-        return $this->updateProduct($request, true);
-    }
-
 
     /**
      * @Security("is_granted('ROLE_ADMIN') or product.getUser() == user")
@@ -136,11 +126,6 @@ class ApiProductController extends Controller
      * @Rest\Patch("/api/products/{uuid}")
      */
     public function patchProductAction(Request $request, Product $product)
-    {
-        return $this->updateProduct($request, false);
-    }
-
-    private function updateProduct(Request $request, $clearMissing)
     {
         $product = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:Product')
