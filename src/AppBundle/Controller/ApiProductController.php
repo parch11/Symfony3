@@ -50,7 +50,7 @@ class ApiProductController extends Controller
     }
 
     /**
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('ROLE_ADMIN') or product.getUser() == user")
      * @Rest\View(serializerGroups={"oneProduct"})
      * @Rest\Get("/api/products/{product_uuid}")
      */
@@ -58,7 +58,7 @@ class ApiProductController extends Controller
     {
         $product = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:Product')
-            ->find($request->get('product_uuid'));
+            ->findOneByUuid($request->get('product_uuid'));
         /* @var $product Product */
 
         if (empty($product)) {
@@ -144,7 +144,7 @@ class ApiProductController extends Controller
     {
         $product = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:Product')
-            ->find($request->get('uuid'));
+            ->findOneByUuid($request->get('uuid'));
         /* @var $product Product */
 
         if (empty($product)) {
