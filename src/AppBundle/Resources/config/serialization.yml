@@ -55,7 +55,7 @@ AppBundle\Entity\Category:
 AppBundle\Entity\City:
     attributes:
         id:
-            groups: ['allCities']
+            groups: ['allCities', 'oneProduct']
         uuid:
             groups: ['allCities', 'oneCity', 'oneProduct']
         name:
@@ -70,7 +70,7 @@ AppBundle\Entity\City:
 AppBundle\Entity\Tag:
     attributes:
         id:
-            groups: ['allTags']
+            groups: ['allTags', 'oneProduct']
         uuid:
             groups: ['allTags', 'oneTag', 'oneProduct', 'allProducts']
         name:

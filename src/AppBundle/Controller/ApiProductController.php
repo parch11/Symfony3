@@ -137,12 +137,21 @@ class ApiProductController extends Controller
         }
 
         $form = $this->createForm(ApiProductType::class, $product);
-
-        $form->submit($request->request->all(), $clearMissing);
+        if ($request->request->get("img")) {
+            $uploadedFile = new UploadedBase64EncodedFile(
+                new Base64EncodedFile($request->request->get("img"))
+            );
+        }
+        $form->submit($request->request->all());
 
         if ($form->isValid()) {
-            $em = $this->get('doctrine.orm.entity_manager');
+            $updateDate = new \DateTime('now');
+            $product->setUpdatedAt($updateDate);
 
+            $em = $this->get('doctrine.orm.entity_manager');
+            if ($request->request->get("img")) {
+                $product->setImageFile($uploadedFile);
+            }
             $em->merge($product);
             $em->flush();
             return $product;
