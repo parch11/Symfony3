@@ -43,6 +43,8 @@ AppBundle\Entity\Product:
 
 AppBundle\Entity\Category:
     attributes:
+        id:
+            groups: ['allCat', 'oneCat', 'oneProduct']
         uuid:
             groups: ['allCat', 'oneCat', 'oneProduct']
         name:
@@ -52,6 +54,8 @@ AppBundle\Entity\Category:
 
 AppBundle\Entity\City:
     attributes:
+        id:
+            groups: ['allCities']
         uuid:
             groups: ['allCities', 'oneCity', 'oneProduct']
         name:
@@ -65,6 +69,8 @@ AppBundle\Entity\City:
 
 AppBundle\Entity\Tag:
     attributes:
+        id:
+            groups: ['allTags']
         uuid:
             groups: ['allTags', 'oneTag', 'oneProduct', 'allProducts']
         name:
