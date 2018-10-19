@@ -59,7 +59,7 @@ class AdminProductController extends Controller
      * Lists all product entities created by one user.
      *
      * @Security("is_granted('ROLE_SUPER_ADMIN')")
-     * @Route("/user/{id}/created", name="admin_product_by_user")
+     * @Route("/user/{uuid}/created", name="admin_product_by_user")
      * @Method("GET")
      */
     public function showUserProductAction(User $user)
@@ -112,7 +112,7 @@ class AdminProductController extends Controller
      * Displays a form to edit an existing product entity.
      *
      * @Security("is_granted('ROLE_ADMIN') or product.getUser() == user")
-     * @Route("/{id}/edit", name="admin_product_edit")
+     * @Route("/{uuid}/edit", name="admin_product_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Product $product)
@@ -138,7 +138,7 @@ class AdminProductController extends Controller
      * Deletes a product entity.
      *
      * @Security("is_granted('ROLE_ADMIN') or product.getUser() == user")
-     * @Route("/{id}", name="admin_product_delete")
+     * @Route("/{uuid}", name="admin_product_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Product $product)
@@ -165,7 +165,7 @@ class AdminProductController extends Controller
     private function createDeleteForm(Product $product)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_product_delete', array('id' => $product->getId())))
+            ->setAction($this->generateUrl('admin_product_delete', array('uuid' => $product->getUuid())))
             ->setMethod('DELETE')
             ->getForm()
         ;

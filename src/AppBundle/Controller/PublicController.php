@@ -17,7 +17,7 @@ class PublicController extends Controller
     /**
      * Finds and displays all products from the selected category.
      *
-     * @Route("category/{id}", name="category_products")
+     * @Route("category/{uuid}", name="category_products")
      * @Method("GET")
      */
     public function showCategoryProductsAction(Category $category)
@@ -36,7 +36,7 @@ class PublicController extends Controller
     /**
      * Finds and displays a product entity.
      *
-     * @Route("product/{id}", name="product_show")
+     * @Route("product/{uuid}", name="product_show")
      * @Method("GET")
      */
     public function showAction(Product $product)
@@ -48,7 +48,7 @@ class PublicController extends Controller
     /**
      * Finds and displays all products from the selected tag.
      *
-     * @Route("tag/{id}", name="tag_products")
+     * @Route("tag/{uuid}", name="tag_products")
      * @Method("GET")
      */
     public function showTagProductsAction(Tag $tag)

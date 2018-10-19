@@ -65,7 +65,7 @@ class AdminCategoryController extends Controller
     /**
      * Displays a form to edit an existing category entity.
      *
-     * @Route("/{id}/edit", name="admin_categories_edit")
+     * @Route("/{uuid}/edit", name="admin_categories_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Category $category)
@@ -90,7 +90,7 @@ class AdminCategoryController extends Controller
     /**
      * Deletes a category entity.
      *
-     * @Route("/{id}", name="admin_categories_delete")
+     * @Route("/{uuid}", name="admin_categories_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Category $category)
@@ -117,7 +117,7 @@ class AdminCategoryController extends Controller
     private function createDeleteForm(Category $category)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_categories_delete', array('id' => $category->getId())))
+            ->setAction($this->generateUrl('admin_categories_delete', array('uuid' => $category->getUuid())))
             ->setMethod('DELETE')
             ->getForm()
         ;

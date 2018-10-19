@@ -35,8 +35,8 @@
         {# ZONE DES CATEGORIES #}
         <ul class="navbar-nav mr-auto text-capitalize">
             {% for category in categories %}
-                <li {{ currentUrl == '/category/' ~ category.id ? ' class="nav-item nav-active"' : 'class="nav-item"' }}>
-                    <a class="nav-link nav-color" href="{{ '/category/' ~ category.id }}">{{ category.name | raw }}</a>
+                <li {{ currentUrl == '/category/' ~ category.uuid ? ' class="nav-item nav-active"' : 'class="nav-item"' }}>
+                    <a class="nav-link nav-color" href="{{ '/category/' ~ category.uuid }}">{{ category.name | raw }}</a>
                 </li>
             {% endfor %}
         </ul>
@@ -53,7 +53,7 @@
                         <div class="list">
                             {% for tag in tags %}
                                 <span>
-                                    <a href="{{ path('tag_products', { 'id': tag.id }) }}" class="btn btn-sm btn-outline-primary tagName">{{ tag.name }}</a>
+                                    <a href="{{ path('tag_products', { 'uuid': tag.uuid }) }}" class="btn btn-sm btn-outline-primary tagName">{{ tag.name }}</a>
                                 </span>
                                 {% endfor %}
                         </div>

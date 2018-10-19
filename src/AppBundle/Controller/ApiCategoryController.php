@@ -35,13 +35,13 @@ class ApiCategoryController extends Controller
     /**
      * @Security("is_granted('ROLE_USER')")
      * @Rest\View(serializerGroups={"oneCat"})
-     * @Rest\Get("/api/categories/{category_id}")
+     * @Rest\Get("/api/categories/{category_uuid}")
      */
     public function getCategoryAction(Request $request)
     {
         $category = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:Category')
-            ->find($request->get('category_id'));
+            ->find($request->get('category_uuid'));
         /* @var $category Category */
 
         if (empty($category)) {

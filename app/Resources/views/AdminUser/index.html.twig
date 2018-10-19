@@ -27,11 +27,11 @@
                     <div class="card-body">
                         <p class="card-text email">{{ user.email }}</p>
                         <p>
-                            <a href="{{ path('admin_product_by_user', { 'id': user.id }) }}" class="btn btn-sm btn-outline-primary">Voir les produits mis en ligne<br> par l'utilisateur</a>
+                            <a href="{{ path('admin_product_by_user', { 'uuid': user.uuid }) }}" class="btn btn-sm btn-outline-primary">Voir les produits mis en ligne<br> par l'utilisateur</a>
                         </p>
                     </div>
                     <div class="card-footer">
-                        <a class="btn btn-warning" href="{{ path('admin_user_edit', { 'id': user.id }) }}">Editer</a>
+                        <a class="btn btn-warning" href="{{ path('admin_user_edit', { 'uuid': user.uuid }) }}">Editer</a>
                     </div>
                 </div>
             </div>

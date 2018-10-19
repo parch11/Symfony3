@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Count;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 
 /**
  * Product
@@ -25,6 +27,16 @@ class Product
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * The internal primary identity key.
+     *
+     * @var UuidInterface|null
+     *
+     * @ORM\Column(type="uuid", unique=true)
+     */
+
+    private $uuid;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -108,6 +120,7 @@ class Product
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->setUuid();
     }
 
     public function getId()
@@ -283,5 +296,21 @@ class Product
     //--------------------------
     // -- VICH UPLOADER END ---- 
     //--------------------------
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
+    private function setUuid()
+    {
+        try {
+            // Generate a version 4 (random) UUID object
+            $uuid4 = Uuid::uuid4();
+            $this->uuid = $uuid4->toString();
+        } catch (UnsatisfiedDependencyException $e) {
+            // Some dependency was not met. Either the method cannot be called on a
+            // 32-bit system, or it can, but it relies on Moontoast\Math to be present.
+            throw new HttpException(500, 'Caught exception: ' . $e->getMessage());
+        }
+    }
 }
 

@@ -29,12 +29,12 @@
             {% else %}
                 <input class="btn btn-primary" type="submit" value="Enregistrer" />
                 {% if canEditRole %}
-                    <a class="btn btn-info" href="{{ path('admin_user_role', { 'id': user.id }) }}">Modifier le niveau d'autorisation</a>
+                    <a class="btn btn-info" href="{{ path('admin_user_role', { 'uuid': user.uuid }) }}">Modifier le niveau d'autorisation</a>
                 {% else %}
                     <button class="btn btn-info" disabled="disabled">Impossible de modifier son propre niveau d'autorisation</button>
                 {% endif %}
                 
-                <a class="btn btn-info" href="{{ path('admin_user_password', { 'id': user.id }) }}">Modifier le mot de passe</a>
+                <a class="btn btn-info" href="{{ path('admin_user_password', { 'uuid': user.uuid }) }}">Modifier le mot de passe</a>
             {% endif %}
             <a class="btn btn-danger" href="{{ path('admin_user_index') }}">Abandonner</a>
         </div>
@@ -80,7 +80,7 @@
         <div class="d-flex justify-content-between">
             {% set deleteValue = "Supprimer le compte utilisateur" %}
             {% include 'Modal/delete.html.twig' %}
-            <a href="{{ path('admin_product_by_user', {'id': user.id }) }}" class="btn btn-outline-primary">Voir les produits mis en ligne par l'utilisateur</a>
+            <a href="{{ path('admin_product_by_user', {'uuid': user.uuid }) }}" class="btn btn-outline-primary">Voir les produits mis en ligne par l'utilisateur</a>
         </div>
     {% endif %}
 

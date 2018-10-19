@@ -35,13 +35,13 @@ class ApiTagController extends Controller
     /**
      * @Security("is_granted('ROLE_USER')")
      * @Rest\View(serializerGroups={"oneTag"})
-     * @Rest\Get("/api/tags/{tag_id}")
+     * @Rest\Get("/api/tags/{tag_uuid}")
      */
     public function getTagAction(Request $request)
     {
         $tag = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:Tag')
-            ->find($request->get('tag_id'));
+            ->find($request->get('tag_uuid'));
         /* @var $tag Tag */
 
         if (empty($tag)) {

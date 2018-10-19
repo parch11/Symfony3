@@ -5,6 +5,8 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 
 /**
  * Tag
@@ -24,6 +26,16 @@ class Tag
     private $id;
 
     /**
+     * The internal primary identity key.
+     *
+     * @var UuidInterface|null
+     *
+     * @ORM\Column(type="uuid", unique=true)
+     */
+
+    private $uuid;
+
+    /**
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;
@@ -36,6 +48,7 @@ class Tag
 
     public function __construct()
     {
+        $this->setUuid();
         $this->products = new ArrayCollection();
     }
 
@@ -87,5 +100,21 @@ class Tag
         }
 
         return $this;
+    }
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
+    private function setUuid()
+    {
+        try {
+            // Generate a version 4 (random) UUID object
+            $uuid4 = Uuid::uuid4();
+            $this->uuid = $uuid4->toString();
+        } catch (UnsatisfiedDependencyException $e) {
+            // Some dependency was not met. Either the method cannot be called on a
+            // 32-bit system, or it can, but it relies on Moontoast\Math to be present.
+            throw new HttpException(500, 'Caught exception: ' . $e->getMessage());
+        }
     }
 }

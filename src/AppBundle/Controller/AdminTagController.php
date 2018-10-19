@@ -64,7 +64,7 @@ class AdminTagController extends Controller
     /**
      * Displays a form to edit an existing tag entity.
      *
-     * @Route("/{id}/edit", name="admin_tag_edit")
+     * @Route("/{uuid}/edit", name="admin_tag_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Tag $tag)
@@ -89,7 +89,7 @@ class AdminTagController extends Controller
     /**
      * Deletes a tag entity.
      *
-     * @Route("/{id}", name="admin_tag_delete")
+     * @Route("/{uuid}", name="admin_tag_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Tag $tag)
@@ -116,7 +116,7 @@ class AdminTagController extends Controller
     private function createDeleteForm(Tag $tag)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_tag_delete', array('id' => $tag->getId())))
+            ->setAction($this->generateUrl('admin_tag_delete', array('uuid' => $tag->getUuid())))
             ->setMethod('DELETE')
             ->getForm()
         ;

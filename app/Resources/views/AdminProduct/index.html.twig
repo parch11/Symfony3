@@ -31,10 +31,10 @@
                     <td>
                         <ul class="list-unstyled inline-list">
                             <li class="list-inline-item">
-                                <a class="btn btn-primary" href="{{ path('product_show', { 'id': product.id }) }}">Voir</a>
+                                <a class="btn btn-primary" href="{{ path('product_show', { 'uuid': product.uuid }) }}">Voir</a>
                             </li>
                             <li class="list-inline-item">
-                                <a class="btn btn-warning" href="{{ path('admin_product_edit', { 'id': product.id }) }}">Editer</a>
+                                <a class="btn btn-warning" href="{{ path('admin_product_edit', { 'uuid': product.uuid }) }}">Editer</a>
                             </li>
                         </ul>
                     </td>

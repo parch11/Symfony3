@@ -35,13 +35,13 @@ class ApiCityController extends Controller
     /**
      * @Security("is_granted('ROLE_USER')")
      * @Rest\View(serializerGroups={"oneCity"})
-     * @Rest\Get("/api/cities/{city_id}")
+     * @Rest\Get("/api/cities/{city_uuid}")
      */
     public function getCityAction(Request $request)
     {
         $city = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:City')
-            ->find($request->get('city_id'));
+            ->find($request->get('city_uuid'));
         /* @var $city City */
 
         if (empty($city)) {

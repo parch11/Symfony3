@@ -36,12 +36,12 @@
                         <p class="card-text">
                             Tags associés :<br />
                                 {% for tag in product.tags %}
-                                    <a href="{{ path('tag_products', { 'id': tag.id }) }}" class="btn btn-sm btn-outline-primary">{{ tag.name }}</a>
+                                    <a href="{{ path('tag_products', { 'uuid': tag.uuid }) }}" class="btn btn-sm btn-outline-primary">{{ tag.name }}</a>
                                 {% endfor %}
                         </p>
                     </div>
                     <div class="card-footer">
-                        <a href="{{ path('product_show', { 'id': product.id }) }}" class="btn btn-primary">Afficher les détails</a>
+                        <a href="{{ path('product_show', { 'uuid': product.uuid }) }}" class="btn btn-primary">Afficher les détails</a>
                     </div>
                 </div>
             </div>

@@ -64,7 +64,7 @@ class AdminCityController extends Controller
     /**
      * Displays a form to edit an existing city entity.
      *
-     * @Route("/{id}/edit", name="admin_city_edit")
+     * @Route("/{uuid}/edit", name="admin_city_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, City $city)
@@ -89,7 +89,7 @@ class AdminCityController extends Controller
     /**
      * Deletes a city entity.
      *
-     * @Route("/{id}", name="admin_city_delete")
+     * @Route("/{uuid}", name="admin_city_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, City $city)
@@ -116,7 +116,7 @@ class AdminCityController extends Controller
     private function createDeleteForm(City $city)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_city_delete', array('id' => $city->getId())))
+            ->setAction($this->generateUrl('admin_city_delete', array('uuid' => $city->getUuid())))
             ->setMethod('DELETE')
             ->getForm()
         ;

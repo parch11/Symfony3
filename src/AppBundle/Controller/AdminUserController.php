@@ -70,7 +70,7 @@ class AdminUserController extends Controller
     /**
      * Displays a form to edit an existing user entity.
      *
-     * @Route("/{id}/edit", name="admin_user_edit")
+     * @Route("/{uuid}/edit", name="admin_user_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, User $user)
@@ -97,7 +97,7 @@ class AdminUserController extends Controller
     /**
      * Displays a form to edit the role of an existing user entity.
      *
-     * @Route("/{id}/role", name="admin_user_role")
+     * @Route("/{uuid}/role", name="admin_user_role")
      * @Method({"GET", "POST"})
      */
     public function roleAction(Request $request, User $user)
@@ -117,7 +117,7 @@ class AdminUserController extends Controller
                 $user->addRole($request->request->get("appbundle_user")["role"]);
                 $this->getDoctrine()->getManager()->flush();
 
-                return $this->redirectToRoute('admin_user_edit', array( "id" => $user->getId()));
+                return $this->redirectToRoute('admin_user_edit', array( "uuid" => $user->getUuid()));
             }
 
             return $this->render('AdminUser/role.html.twig', array(
@@ -125,14 +125,14 @@ class AdminUserController extends Controller
                 'form' => $editForm->createView(),
             ));
         }else {
-            return $this->redirectToRoute('admin_user_edit', array("id" => $user->getId()));
+            return $this->redirectToRoute('admin_user_edit', array("uuid" => $user->getUuid()));
         }
     }
 
     /**
      * Displays a form to edit the password of an existing user entity.
      *
-     * @Route("/{id}/password", name="admin_user_password")
+     * @Route("/{uuid}/password", name="admin_user_password")
      * @Method({"GET", "POST"})
      */
     public function passwordAction(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder)
@@ -146,7 +146,7 @@ class AdminUserController extends Controller
             $user->setPassword($password);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('admin_user_edit', array("id" => $user->getId()));
+            return $this->redirectToRoute('admin_user_edit', array("uuid" => $user->getUuid()));
         }
 
         return $this->render('AdminUser/password.html.twig', array(
@@ -158,7 +158,7 @@ class AdminUserController extends Controller
     /**
      * Deletes a user entity.
      *
-     * @Route("/{id}", name="admin_user_delete")
+     * @Route("/{uuid}", name="admin_user_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, User $user)
@@ -185,7 +185,7 @@ class AdminUserController extends Controller
     private function createDeleteForm(User $user)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_user_delete', array('id' => $user->getId())))
+            ->setAction($this->generateUrl('admin_user_delete', array('uuid' => $user->getUuid())))
             ->setMethod('DELETE')
             ->getForm()
         ;
