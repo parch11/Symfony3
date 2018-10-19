@@ -1,6 +1,6 @@
 AppBundle\Entity\User:
     attributes:
-        id:
+        uuid:
             groups: ['allUsers', 'oneProduct', 'oneUser']
         username:
             groups: ['allUsers', 'oneProduct', 'oneUser']
@@ -18,7 +18,7 @@ AppBundle\Entity\User:
 
 AppBundle\Entity\Product:
     attributes:
-        id:
+        uuid:
             groups: ['oneUser', 'oneProduct', 'allProducts', 'oneCat', 'oneCity', 'oneTag']
         title:
             groups: ['oneUser', 'oneProduct', 'allProducts', 'oneCat', 'oneCity', 'oneTag']
@@ -43,7 +43,7 @@ AppBundle\Entity\Product:
 
 AppBundle\Entity\Category:
     attributes:
-        id:
+        uuid:
             groups: ['allCat', 'oneCat', 'oneProduct']
         name:
             groups: ['allCat', 'oneCat', 'oneProduct']
@@ -52,7 +52,7 @@ AppBundle\Entity\Category:
 
 AppBundle\Entity\City:
     attributes:
-        id:
+        uuid:
             groups: ['allCities', 'oneCity', 'oneProduct']
         name:
             groups: ['allCities', 'oneCity', 'oneProduct', 'allProducts']
@@ -65,33 +65,9 @@ AppBundle\Entity\City:
 
 AppBundle\Entity\Tag:
     attributes:
-        id:
+        uuid:
             groups: ['allTags', 'oneTag', 'oneProduct', 'allProducts']
         name:
             groups: ['allTags', 'oneTag', 'oneProduct', 'allProducts']
         products:
             groups: ['oneTag']
-
-# EXEMPLE :
-
-# AppBundle\Entity\Place:
-#     attributes:
-#         id:
-#             groups: ['place', 'price']
-#         name:
-#             groups: ['place', 'price']
-#         address:
-#             groups: ['place', 'price']
-#         prices:
-#             groups: ['place']
-
-# AppBundle\Entity\Price:
-#     attributes:
-#         id:
-#             groups: ['place', 'price']
-#         type:
-#             groups: ['place', 'price']
-#         value:
-#             groups: ['place', 'price']
-#         place:
-#             groups: ['price']
