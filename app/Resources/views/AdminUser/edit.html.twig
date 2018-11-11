@@ -78,10 +78,16 @@
     {% if delete_form is defined %}
     <br />
         <div class="d-flex justify-content-between">
-            {% set deleteValue = "Supprimer le compte utilisateur" %}
-            {% include 'Modal/delete.html.twig' %}
+                {% if canEditRole %}
+                    {% set deleteValue = "Supprimer le compte utilisateur" %}
+                    {% include 'Modal/delete.html.twig' %}
+                {% else %}
+                    <button class="btn btn-info" disabled="disabled">Impossible de supprimer son propre compte</button>
+                {% endif %}
             <a href="{{ path('admin_product_by_user', {'uuid': user.uuid }) }}" class="btn btn-outline-primary">Voir les produits mis en ligne par l'utilisateur</a>
         </div>
+    <p class="text-danger">* Pour pouvoir pouvoir supprimer un compte, il faut qu'aucun produit ne lui soit associé.</p>
+
     {% endif %}
 
 {% endblock %}
