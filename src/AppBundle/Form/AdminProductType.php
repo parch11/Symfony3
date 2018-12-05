@@ -27,10 +27,6 @@ class AdminProductType extends AbstractType
             'required' => false,
             'attr' => array('class' => 'custom-file-input', 'lang' => 'fr'),
         ))
-        ->add('ref', null, array(
-            'label' => "Référence de l'annonce",
-            'attr' => array('class' => 'form-control')
-        ))
         ->add('autoDeleteAt',null, array(
             'label' => 'Date de mise hors ligne',
             'date_widget' => 'single_text',

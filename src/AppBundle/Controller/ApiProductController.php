@@ -89,7 +89,11 @@ class ApiProductController extends Controller
             $em = $this->get('doctrine.orm.entity_manager');
             $startDate = new \DateTime('now');
             $endDate = new \DateTime('+14 day');
-            $product->setCreatedAt($startDate)->setUpdatedAt($startDate)->setAutoDeleteAt($endDate);
+            $product
+                ->setCreatedAt($startDate)
+                ->setUpdatedAt($startDate)
+                ->setAutoDeleteAt($endDate)
+                ->setRef(time());
 
             if ($request->request->get("img")) {
                 $product->setImageFile($uploadedFile);

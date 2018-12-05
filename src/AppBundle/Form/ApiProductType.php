@@ -22,7 +22,6 @@ class ApiProductType extends AbstractType
             'required' => false,
             'mapped' => false
         ))
-        ->add('ref')
         ->add('city')
         ->add('tags')
         ->add('category');

@@ -86,7 +86,11 @@ class AdminProductController extends Controller
 
         $startDate = new \DateTime('now');
         $endDate = new \DateTime('+14 day');
-        $product->setCreatedAt($startDate)->setUpdatedAt($startDate)->setAutoDeleteAt($endDate);
+        $product
+            ->setCreatedAt($startDate)
+            ->setUpdatedAt($startDate)
+            ->setAutoDeleteAt($endDate)
+            ->setRef(time());
         
         $form = $this->createForm('AppBundle\Form\AdminProductType', $product);
         $form->handleRequest($request);
