@@ -10,6 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * User
@@ -19,7 +20,7 @@ use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
  */
 
 
-class User implements UserInterface
+class User implements AdvancedUserInterface
 {
     /**
      * @ORM\Id()
@@ -47,8 +48,8 @@ class User implements UserInterface
      * @Assert\NotBlank()
      * @Assert\Length(min=6, 
      *  max=255,
-     *  minMessage = "Longueur mini : 6",
-     *  maxMessage = "Longueur max 255"
+     *  minMessage = "Longueur minimun du mot de passe : 6",
+     *  maxMessage = "Longueur maximun du mot de passe : 255"
      * )
      */
     private $plainPassword;
@@ -182,6 +183,7 @@ class User implements UserInterface
             $this->id,
             $this->username,
             $this->password,
+            $this->isActive
             // see section on salt below
             // $this->salt,
         ));
@@ -194,6 +196,7 @@ class User implements UserInterface
             $this->id,
             $this->username,
             $this->password,
+            $this->isActive
             // see section on salt below
             // $this->salt
         ) = unserialize($serialized, array('allowed_classes' => false));
@@ -249,6 +252,28 @@ class User implements UserInterface
 
         return $this;
     }
+    //AdvancerUserInterface
+
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->isActive;
+    }
+
 }
 
 
