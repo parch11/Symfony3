@@ -1,14 +1,22 @@
 {% extends 'base.html.twig' %}
 {% block title %}Accueil{% endblock %}
 {% block body %}
+
 <div class="text-center">
     <br />
     <img style="max-height : 100%; max-width : 100%" src="https://picsum.photos/500/200" alt="Image de démonstration">
 </div>
 <br />
+
 <h2>Bienvenue sur notre site vitrine ! </h2>
-<p>Texte de présentation ...</p>
-<p>Lien vers le site wordpress...</p>
+<p>
+La ressourcerie du Parchemin … une action solidaire et écologique.<br />
+Une ressourcerie collecte, valorise, vends et informe sur nos actions.<br />
+Notre vitrine met en lumière les objets du réemploi et vous permet d’apercevoir la multiplicité des catégories que vous trouverez dans notre magasin … avant de venir nous voir !<br />
+Comment cela fonctionne ? Vous pouvez rechercher en vous aidant des catégories ou directement avec les tags.<br />
+Le Parchemin, structure d’insertion par l’activité économique, pour plus d'information <a href="https://leparchemin.org/index.php/lassociation/" target="_blank">cliquez sur ce lien</a>.<br />
+Vous avez une question ? Vous souhaitez nous contacter ? Rendez-vous sur <a href="https://leparchemin.org/index.php/contact/" target="_blank">cette page</a>.
+</p>
 <h2>Nos derniers produits mis en ligne</h2>
 <div class="row">
     {% for product in products %}
